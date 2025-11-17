@@ -1,0 +1,367 @@
+
+                <!-- CART ICON -->
+                <div>
+                    <a class="btn btn-link p-0 position-relative" style="color: #d3213f;" data-bs-toggle="modal"
+                       data-bs-target="#cartModal">
+                        <i class="bx bx-shopping-bag fs-3 mt-2" style="margin-right: 20px;"></i>
+
+                        <span id="cart-count"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                              style="font-size: 12px;">
+                            0
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+        <!-- SẢN PHẨM -->
+        <section class="container mt-5">
+            <h3 class="text-center mt-5 mb-5 fw-bold" style="color: rgb(122, 5, 24);">--- ĐANG GIẢM GIÁ ---</h3>
+
+            <div class="row g-4" id="product-list">
+
+                <!-- SP1 -->
+                <div class="col">
+                    <div class="card h-auto position-relative">
+                        <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+                        <img src="asset/hinhanh/hoagiamgia/sp1.jpg" class="card-img-top" style="height:350px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Nồng nàn tình yêu</h5>
+                            <p class="card-text text-danger fw-bold">
+                                540,000 VND
+                                <span class="text-decoration-line-through text-secondary">620,000 VND</span>
+                            </p>
+
+                            <button class="btn btn-outline-danger w-100 btn-add">Đặt hàng</button>
+
+                            <!-- THÊM VÀO GIỎ -->
+                            <button class="btn btn-warning w-100 mt-2 btn-add-cart">
+                                <i class="bx bx-cart-add"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SP2 -->
+                <div class="col">
+                    <div class="card h-auto position-relative">
+                        <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+                        <img src="asset/hinhanh/hoagiamgia/sp2.jpg" class="card-img-top" style="height:350px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Bouquet Hồng đỏ</h5>
+                            <p class="card-text text-danger fw-bold">
+                                720,000 VND
+                                <span class="text-decoration-line-through text-secondary">830,000 VND</span>
+                            </p>
+
+                            <button class="btn btn-outline-danger w-100 btn-add">Đặt hàng</button>
+
+                            <button class="btn btn-warning w-100 mt-2 btn-add-cart">
+                                <i class="bx bx-cart-add"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SP3 -->
+                <div class="col">
+                    <div class="card h-auto position-relative">
+                        <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+                        <img src="asset/hinhanh/hoagiamgia/sp3.jpg" class="card-img-top" style="height:350px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Rực rỡ sắc xuân</h5>
+                            <p class="card-text text-danger fw-bold">
+                                720,000 VND
+                                <span class="text-decoration-line-through text-secondary">830,000 VND</span>
+                            </p>
+
+                            <button class="btn btn-outline-danger w-100 btn-add">Đặt hàng</button>
+
+                            <button class="btn btn-warning w-100 mt-2 btn-add-cart">
+                                <i class="bx bx-cart-add"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SP4 -->
+                <div class="col">
+                    <div class="card h-auto position-relative">
+                        <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+                        <img src="asset/hinhanh/hoagiamgia/sp4.jpg" class="card-img-top" style="height:350px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Tươi mới mỗi ngày</h5>
+                            <p class="card-text text-danger fw-bold">
+                                660,000 VND
+                                <span class="text-decoration-line-through text-secondary">750,000 VND</span>
+                            </p>
+
+                            <button class="btn btn-outline-danger w-100 btn-add">Đặt hàng</button>
+
+                            <button class="btn btn-warning w-100 mt-2 btn-add-cart">
+                                <i class="bx bx-cart-add"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="mt-5 pt-4 pb-3 footer-section" style="border-top: solid 5px rgb(126, 13, 31);">
+            <div class="container">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-4 text-center text-md-start">
+                        <img src="asset/hinhanh/logo2 (2).png" width="140">
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+                            <h5 class="m-0 fw-bold me-4" style="color:#8B0A20;">ĐĂNG KÝ NHẬN TIN</h5>
+                            <div class="input-group" style="max-width: 350px;">
+                                <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                                <button class="btn btn-danger"><a href="#" class="text-light">Đăng ký</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="text-center">
+                    <p>Copyright © 2022 Spark. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MODAL GIỎ HÀNG -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Giỏ hàng</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>SP</th>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                                <th>SL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items"></tbody>
+                    </table>
+
+                    <h5 class="text-end mt-3">
+                        Tổng:
+                        <span id="cart-total">0</span> VNĐ
+                    </h5>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button class="btn btn-danger" id="checkoutBtn">Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL THANH TOÁN -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Thanh toán</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <label class="fw-bold mb-2">Tên khách hàng</label>
+                    <input type="text" class="form-control mb-3" id="cusName">
+
+                    <label class="fw-bold mb-2">Số điện thoại</label>
+                    <input type="text" class="form-control mb-3" id="cusPhone">
+
+                    <label class="fw-bold mb-2">Địa chỉ giao hàng</label>
+                    <input type="text" class="form-control mb-3" id="cusAddress">
+
+                    <label class="fw-bold mb-2">Phương thức thanh toán</label>
+                    <select class="form-select" id="paymentMethod">
+                        <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="Bank">Chuyển khoản ngân hàng</option>
+                        <option value="Momo">Ví Momo</option>
+                    </select>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button class="btn btn-success" id="confirmOrderBtn">Xác nhận</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL HOÀN TẤT -->
+    <div class="modal fade" id="doneModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Đặt hàng thành công!</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <p class="fw-bold text-success">Cảm ơn bạn đã mua hàng!</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT GIỎ HÀNG -->
+    <script>
+        let cart = [];
+        let cartCount = 0;
+
+        // sự kiện nút ĐẶT HÀNG mở modal
+        document.querySelectorAll(".btn-add").forEach((btn, index) => {
+            btn.addEventListener("click", () => addToCart(index, true));
+        });
+
+        // sự kiện nút THÊM VÀO GIỎ không mở modal
+        document.querySelectorAll(".btn-add-cart").forEach((btn, index) => {
+            btn.addEventListener("click", () => addToCart(index, false));
+        });
+
+        function getProductData(index) {
+            const cards = document.querySelectorAll(".card");
+            const card = cards[index];
+
+            let priceText = card.querySelector(".card-text").innerText;
+            let priceMatch = priceText.match(/[\d.,]+/);
+            let price = Number(priceMatch[0].replace(/[.,]/g, ""));
+
+            return {
+                name: card.querySelector(".card-title").innerText,
+                price: price,
+                img: card.querySelector("img").src,
+                qty: 1
+            };
+        }
+
+        function addToCart(index, openModal) {
+            const product = getProductData(index);
+
+            // kiểm tra sản phẩm đã có trong giỏ chưa
+            let exist = cart.find(item => item.name === product.name);
+
+            if (exist) {
+                exist.qty++; // tăng số lượng
+            } else {
+                cart.push(product); // thêm mới
+            }
+
+            // cập nhật số lượng tổng
+            cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById("cart-count").innerText = cartCount;
+
+            updateCartUI();
+
+            if (openModal)
+                new bootstrap.Modal(document.getElementById("cartModal")).show();
+        }
+
+        function updateCartUI() {
+            const tbody = document.getElementById("cart-items");
+            tbody.innerHTML = "";
+
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                total += item.price * item.qty;
+
+                tbody.innerHTML += `
+            <tr>
+                <td><img src="${item.img}" width="50"></td>
+                <td>${item.name}</td>
+                <td>${item.price.toLocaleString()}</td>
+                <td>${item.qty}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="removeItem(${i})">X</button>
+                </td>
+            </tr>
+        `;
+            });
+
+            document.getElementById("cart-total").innerText = total.toLocaleString();
+        }
+
+
+        function removeItem(i) {
+            cart.splice(i, 1);
+            cartCount--;
+            document.getElementById("cart-count").innerText = cartCount;
+
+            updateCartUI();
+        }
+
+        document.getElementById("checkoutBtn").addEventListener("click", () => {
+            new bootstrap.Modal(document.getElementById("checkoutModal")).show();
+        });
+
+        document.getElementById("confirmOrderBtn").addEventListener("click", () => {
+            if (!cusName.value || !cusPhone.value || !cusAddress.value) {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            cart = [];
+            cartCount = 0;
+            document.getElementById("cart-count").innerText = 0;
+
+            updateCartUI();
+            new bootstrap.Modal(document.getElementById("doneModal")).show();
+        });
+        document.getElementById("confirmOrderBtn").addEventListener("click", () => {
+            if (!cusName.value || !cusPhone.value || !cusAddress.value) {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            cart = [];
+            cartCount = 0;
+            document.getElementById("cart-count").innerText = 0;
+
+            updateCartUI();
+
+            // đóng tất cả modal đang mở
+            const openedModals = document.querySelectorAll(".modal.show");
+            // xóa lớp nền xám của modal
+            openedModals.forEach(m => bootstrap.Modal.getInstance(m).hide());
+
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+
+
+            // mở modal hoàn tất
+            new bootstrap.Modal(document.getElementById("doneModal")).show();
+        });
+
+    </script>
+
