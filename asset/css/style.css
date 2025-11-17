@@ -27,25 +27,23 @@ body {
   height: 100vh; /* Chiếm 100% màn hình */
   object-fit: cover;
 }
-.search-box {
-  width: 230px;
+.search-box .form-control {
+  border-color: #af0a5c;
+  height: 40px;
 }
-.search-box input {
-  height: 38px;
+
+.search-box .btn {
+  background-color: #af0a5c;
   border-color: #af0a5c;
 }
-.search-box .search-icon {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color:#af0a5c;
+.search-box .btn:hover {
+  background-color: #d3213f;
 }
-.search-input:hover,
-.search-input:focus {
-  border-color: #af0a5c ;
-  box-shadow: 3px 0 3px 0.15rem #e42695;
+.search-box .form-control:focus,
+.search-box .btn:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: #af0a5c;
 }
 
 header .container {
@@ -136,4 +134,48 @@ header .container {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+/* ===== CARD SẢN PHẨM ===== */
+.card {
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Hình sản phẩm */
+.card-img-top {
+    border-radius: 5px;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+/* Tên sản phẩm */
+.card-title {
+    font-size: 20px;
+    min-height: 30px;
+    font-weight: bold;
+}
+
+/* Giá */
+.card-body p {
+    margin: 5px 0;
+}
+
+/* Nút đặt hàng */
+.btn-outline-danger {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Badge giảm giá */
+.badge {
+    font-size: 0.8rem;
+    padding: 5px 8px;
 }
