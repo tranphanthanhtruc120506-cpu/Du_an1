@@ -1,0 +1,87 @@
+
+body {
+  background: linear-gradient(135deg, #fdf1f6, #faeaf0); 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+}
+
+#formRegister {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(206, 23, 78, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formRegister:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(206, 23, 78, 0.3);
+}
+
+#formRegister h3 {
+  color: rgb(206, 23, 78);
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.form-label {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: rgb(206, 23, 78);
+  box-shadow: 0 0 8px rgba(206, 23, 78, 0.3);
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, rgb(206, 23, 78), #af0a5c);
+  border: none;
+  padding: 10px 0;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #af0a5c, rgb(206, 23, 78));
+  transform: translateY(-2px);
+}
+
+p a {
+  color: rgb(206, 23, 78);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #af0a5c;
+  text-decoration: underline;
+}
+
+#userNameError,
+#emailError,
+#passwordError,
+#rePasswordError {
+  font-size: 0.85rem;
+  margin-top: 5px;
+  color: rgb(206, 23, 78);
+}
+
+@media (max-width: 500px) {
+  #formRegister {
+    width: 90%;
+    padding: 20px;
+  }
+}
