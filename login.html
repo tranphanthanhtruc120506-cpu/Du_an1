@@ -54,3 +54,182 @@
     <script src="asset/js/login.js"></script>
   </body>
 </html>
+
+<!-- FOOTER -->
+        <footer class="mt-5 pt-4 pb-3 footer-section" style="border-top: solid 5px rgb(126, 13, 31);">
+  <div class="container">
+    <div class="container">
+
+    <!-- Logo + Đăng ký nhận tin -->
+    <div class="row align-items-center mb-4">
+      <div class="col-md-4 mb-3 text-center text-md-start">
+        <img src="asset/hinhanh/logo2 (2).png" width="140" alt="">
+      </div>
+
+      <div class="col-md-8">
+        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+          <h5 class="m-0 fw-bold me-4" style="color:#8B0A20;">ĐĂNG KÝ NHẬN TIN</h5>
+          <div class="input-group" style="max-width: 350px;">
+            <input type="email" class="form-control" placeholder="Nhập email của bạn">
+            <button  class="btn btn-danger"><a href="index.html" class="text-light">Đăng ký</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+
+      <!-- VỀ CHÚNG TÔI -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">VỀ CHÚNG TÔI</h6>
+        <p>Spark là thương hiệu được thành lập vào năm 2022 với tiêu chí đặt chất lượng sản phẩm lên hàng đầu.</p>
+
+        <div class="social-icons mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- LIÊN KẾT -->
+      <div class="col-md-3 mb-4 fade-in ">
+        <h6 class="mb-3">LIÊN KẾT</h6>
+        <ul class="list-unstyled">
+          <li><a href="index.html">Về chúng tôi</a></li>
+          <li><a href="index.html">sản phẩm</a></li>
+          <li><a href="index.html">Điều khoản</a></li>
+          <li><a href="index.html">Liên hệ</a></li>
+          <li><a href="index.html">Tin tức</a></li>
+        </ul>
+      </div>
+
+      <!-- THỰC ĐƠN -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">Chi tiết sản phẩm</h6>
+        <ul class="list-unstyled">
+          <li><a href="#">Chủ đề</a></li>
+          <li><a href="#">Kiểu dáng</a></li>
+          <li><a href="#">Hoa tươi</a></li>
+          <li><a href="#">Đang giảm giá</a></li>
+        </ul>
+      </div>
+
+      <!-- LIÊN HỆ -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">LIÊN HỆ</h6>
+        <p><i class="fas fa-map-marker-alt"></i> 273 An Dương Vương, Q5, TP.HCM</p>
+        <p><i class="fas fa-phone-alt"></i> 0123 456 789 – 0987 654 321</p>
+        <p><i class="fas fa-envelope"></i> abc@domain.com</p>
+        <p><i class="fas fa-envelope"></i> infoabc@domain.com</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="text-center">
+      <p>Copyright © 2022 spark. All Rights Reserved.</p>
+    </div>
+  </div>
+        </footer>
+    </div>
+
+    <!-- MODAL GIỎ HÀNG -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Giỏ hàng</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>SP</th>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                                <th>SL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items"></tbody>
+                    </table>
+
+                    <h5 class="text-end mt-3">
+                        Tổng:
+                        <span id="cart-total">0</span> VNĐ
+                    </h5>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button class="btn btn-danger" id="checkoutBtn">Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL THANH TOÁN -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Thanh toán</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <label class="fw-bold mb-2">Tên khách hàng</label>
+                    <input type="text" class="form-control mb-3" id="cusName">
+
+                    <label class="fw-bold mb-2">Số điện thoại</label>
+                    <input type="text" class="form-control mb-3" id="cusPhone">
+
+                    <label class="fw-bold mb-2">Địa chỉ giao hàng</label>
+                    <input type="text" class="form-control mb-3" id="cusAddress">
+
+                    <label class="fw-bold mb-2">Phương thức thanh toán</label>
+                    <select class="form-select" id="paymentMethod">
+                        <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="Bank">Chuyển khoản ngân hàng</option>
+                        <option value="Momo">Ví Momo</option>
+                    </select>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button class="btn btn-success" id="confirmOrderBtn">Xác nhận</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL HOÀN TẤT -->
+    <div class="modal fade" id="doneModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Đặt hàng thành công!</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <p class="fw-bold text-success">Cảm ơn bạn đã mua hàng!</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+
+            </div>
+        </div>
+    </div>

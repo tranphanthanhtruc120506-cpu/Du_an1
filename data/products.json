@@ -2,37 +2,49 @@
   {
     "id": 1,
     "name": "Nồng nàn tình yêu",
+    "topic": "không",
+    "style": "bó hoa",
+    "flower": "hoa hồng",
     "salePercent": 13,
     "img": "asset/hinhanh/hoagiamgia/sp1.jpg",
-    "priceNew": "610,000",
-    "priceOld": "700,000",
+    "priceNew": 610000,
+    "priceOld": 700000,
     "status": "Enabled"
   },
   {
     "id": 2,
     "name": "Hoa hướng dương rực rỡ",
+    "topic": "không",
+    "style": "bó hoa",
+    "flower": "hoa hướng dương",
     "salePercent": 13,
     "img": "asset/hinhanh/hoagiamgia/sp2.jpg",
-    "priceNew": "510,000",
-    "priceOld": "600,000",
+    "priceNew": 510000,
+    "priceOld": 600000,
     "status": "Enabled"
   },
   {
     "id": 3,
     "name": "Sắc hoa dịu dàng",
+    "topic": "không",
+    "style": "giỏ hoa",
+    "flower": "baby",
     "salePercent": 20,
     "img": "asset/hinhanh/hoagiamgia/sp3.jpg",
-    "priceNew": "650,000",
-    "priceOld": "750,000",
+    "priceNew": 650000,
+    "priceOld": 750000,
     "status": "Enabled"
   },
   {
     "id": 4,
     "name": "Hoa pastel sang trọng",
+    "topic": "không",
+    "style": "giỏ hoa",
+    "flower": "hoa hồng",
     "salePercent": 15,
     "img": "asset/hinhanh/hoagiamgia/sp4.jpg",
-    "priceNew": "689,000",
-    "priceOld": "790,000",
+    "priceNew": 689000,
+    "priceOld": 790000,
     "status": "Enabled"
   }
 ]
