@@ -15,53 +15,53 @@ let usersRaw = localStorage.getItem("users");
 let userLocal;
 
 try {
-    userLocal = usersRaw ? JSON.parse(usersRaw) : [];
+  userLocal = usersRaw ? JSON.parse(usersRaw) : [];
 } catch (e) {
-    console.error("Dữ liệu lỗi, reset lại localStorage");
-    userLocal = [];
-    localStorage.removeItem("users");
+  console.error("Dữ liệu lỗi, reset lại localStorage");
+  userLocal = [];
+  localStorage.removeItem("users");
 }
 
-formRegister.addEventListener("submit", function(e){
-    e.preventDefault();
+formRegister.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    // Kiểm tra rỗng
-    userNameError.style.display = userNameElement.value ? "none" : "block";
-    emailError.style.display = emailElement.value ? "none" : "block";
-    passwordError.style.display = passwordElement.value ? "none" : "block";
-    rePasswordError.style.display = rePasswordElement.value ? "none" : "block";
+  // Kiểm tra rỗng
+  userNameError.style.display = userNameElement.value ? "none" : "block";
+  emailError.style.display = emailElement.value ? "none" : "block";
+  passwordError.style.display = passwordElement.value ? "none" : "block";
+  rePasswordError.style.display = rePasswordElement.value ? "none" : "block";
 
-    // Kiểm tra mật khẩu trùng khớp
-    if (passwordElement.value !== rePasswordElement.value) {
-        rePasswordError.style.display = "block";
-        rePasswordError.innerHTML = "Mật khẩu không khớp";
-        return;
-    } else {
-        rePasswordError.innerHTML = "Mật khẩu không được để trống";
-    }
+  // Kiểm tra mật khẩu trùng khớp
+  if (passwordElement.value !== rePasswordElement.value) {
+    rePasswordError.style.display = "block";
+    rePasswordError.innerHTML = "Mật khẩu không khớp";
+    return;
+  } else {
+    rePasswordError.innerHTML = "Mật khẩu không được để trống";
+  }
 
-    // Nếu hợp lệ → Lưu dữ liệu
-    if (
-        userNameElement.value &&
-        emailElement.value &&
-        passwordElement.value &&
-        rePasswordElement.value &&
-        passwordElement.value === rePasswordElement.value
-    ) {
-        const user = {
-            userId: Date.now(),
-            userName: userNameElement.value,
-            email: emailElement.value,
-            password: passwordElement.value,
-            address: addressElement.value,
-        };
+  // Nếu hợp lệ → Lưu dữ liệu
+  if (
+    userNameElement.value &&
+    emailElement.value &&
+    passwordElement.value &&
+    rePasswordElement.value &&
+    passwordElement.value === rePasswordElement.value
+  ) {
+    const user = {
+      userId: Date.now(),
+      userName: userNameElement.value,
+      email: emailElement.value,
+      password: passwordElement.value,
+      address: addressElement.value,
+    };
 
-        userLocal.push(user);
+    userLocal.push(user);
 
-        // Lưu vào Local Storage
-        localStorage.setItem("users", JSON.stringify(userLocal));
+    // Lưu vào Local Storage
+    localStorage.setItem("users", JSON.stringify(userLocal));
 
-        // Chuyển trang
-        window.location.href = "login.html";
-    }
+    // Chuyển trang
+    window.location.href = "login.html";
+  }
 });

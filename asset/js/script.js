@@ -8,39 +8,39 @@ const productList = document.getElementById("product-list");
 
 // ===== CLICK TÌM KIẾM =====
 if (searchButton) {
-    searchButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        localStorage.setItem("searching", searchInput.value);
-        location.reload();
-    });
+  searchButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.setItem("searching", searchInput.value);
+    location.reload();
+  });
 }
 
 // ===== HÀM LOAD SẢN PHẨM =====
 function loadProducts() {
-    fetch(productApi)
-        .then(res => res.json())
-        .then(products => {
-            let searchingData = localStorage.getItem("searching");
+  fetch(productApi)
+    .then((res) => res.json())
+    .then((products) => {
+      let searchingData = localStorage.getItem("searching");
 
-            let filteredProducts = products;
+      let filteredProducts = products;
 
-            if (searchingData && searchingData.trim() !== "") {
-                filteredProducts = products.filter(product =>
-                    product.name.toLowerCase().includes(searchingData.toLowerCase())
-                );
-            }
+      if (searchingData && searchingData.trim() !== "") {
+        filteredProducts = products.filter((product) =>
+          product.name.toLowerCase().includes(searchingData.toLowerCase())
+        );
+      }
 
-            renderProducts(filteredProducts);
-            localStorage.removeItem("searching");
-        });
+      renderProducts(filteredProducts);
+      localStorage.removeItem("searching");
+    });
 }
 
 // ===== HÀM RENDER SẢN PHẨM =====
 function renderProducts(products) {
-    productList.innerHTML = "";
+  productList.innerHTML = "";
 
-    products.forEach(item => {
-        productList.innerHTML += `
+  products.forEach((item) => {
+    productList.innerHTML += `
         <div class="col-sm-3 col-6">
             <div class="card h-auto position-relative p-2">
 
@@ -61,7 +61,7 @@ function renderProducts(products) {
                 </div>
             </div>
         </div>`;
-    });
+  });
 }
 
 loadProducts();
