@@ -1,94 +1,3 @@
-<!DOCTYPE html>
-<html lang="vn">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cửa Hàng Hoa Tươi</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
-    <link href="asset/css/style.css" rel="stylesheet" />
-</head>
-
-<body>
-    <div class="container shadow-sm bg-body">
-
-        <!-- HEADER -->
-        <header class="py-2 mb-3 pt-3">
-            <div class="container d-flex align-items-center justify-content-between gap-3 flex-wrap">
-
-                <div class="logo">
-                    <img src="asset/hinhanh/logo2 (2).png" alt="Logo" class="img-fluid" width="100">
-                </div>
-
-                <!-- NAV -->
-                <nav class="navbar navbar-expand-lg p-0 mt-2" style="margin-left: -40px;">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Chủ đề</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Hoa sinh nhật</a></li>
-                                    <li><a class="dropdown-item" href="#">Hoa cầu hôn</a></li>
-                                    <li><a class="dropdown-item" href="#">Hoa tốt nghiệp</a></li>
-                                    <li><a class="dropdown-item" href="#">Hoa khai trương</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kiểu dáng</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Bó hoa</a></li>
-                                    <li><a class="dropdown-item" href="#">Giỏ hoa</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Hoa tươi</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Hoa hồng</a></li>
-                                    <li><a class="dropdown-item" href="#">Hoa hướng dương</a></li>
-                                    <li><a class="dropdown-item" href="#">Hoa baby</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item"><a class="nav-link" href="index.html">Đang giảm giá</a></li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <!-- SEARCH -->
-                <div class="mt-2">
-                    <form class="search-box">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                            <button class="btn btn-danger" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- USER -->
-                <div class="d-flex align-items-center gap-2 flex-nowrap ">
-                    <div class="dropdown mt-2" style="margin-left: -10px;">
-                        <a class="btn btn-link p-0 dropdown-toggle" style="color: #d3213f;" data-bs-toggle="dropdown">
-                            <i class="bx bx-user fs-3"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
-                            <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- CART ICON -->
                 <div>
@@ -105,13 +14,6 @@
                 </div>
 
             </div>
-        </header>
-
-        <!-- BANNER -->
-        <section class="banner container">
-            <img src="asset/hinhanh/banner1.png" class="img-fluid rounded-2" alt="Banner hoa">
-        </section>
-
         <!-- SẢN PHẨM -->
         <section class="container mt-5">
             <h3 class="text-center mt-5 mb-5 fw-bold" style="color: rgb(122, 5, 24);">--- ĐANG GIẢM GIÁ ---</h3>
@@ -208,81 +110,29 @@
 
         <!-- FOOTER -->
         <footer class="mt-5 pt-4 pb-3 footer-section" style="border-top: solid 5px rgb(126, 13, 31);">
-  <div class="container">
-    <div class="container">
+            <div class="container">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-4 text-center text-md-start">
+                        <img src="asset/hinhanh/logo2 (2).png" width="140">
+                    </div>
 
-    <!-- Logo + Đăng ký nhận tin -->
-    <div class="row align-items-center mb-4">
-      <div class="col-md-4 mb-3 text-center text-md-start">
-        <img src="asset/hinhanh/logo2 (2).png" width="140" alt="">
-      </div>
+                    <div class="col-md-8">
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+                            <h5 class="m-0 fw-bold me-4" style="color:#8B0A20;">ĐĂNG KÝ NHẬN TIN</h5>
+                            <div class="input-group" style="max-width: 350px;">
+                                <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                                <button class="btn btn-danger"><a href="#" class="text-light">Đăng ký</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="col-md-8">
-        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
-          <h5 class="m-0 fw-bold me-4" style="color:#8B0A20;">ĐĂNG KÝ NHẬN TIN</h5>
-          <div class="input-group" style="max-width: 350px;">
-            <input type="email" class="form-control" placeholder="Nhập email của bạn">
-            <button  class="btn btn-danger"><a href="index.html" class="text-light">Đăng ký</a></button>
-          </div>
-        </div>
-      </div>
-    </div>
+                <hr>
 
-    <hr>
-    <div class="row">
-
-      <!-- VỀ CHÚNG TÔI -->
-      <div class="col-md-3 mb-4 fade-in">
-        <h6 class="mb-3">VỀ CHÚNG TÔI</h6>
-        <p>Spark là thương hiệu được thành lập vào năm 2022 với tiêu chí đặt chất lượng sản phẩm lên hàng đầu.</p>
-
-        <div class="social-icons mt-3">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <!-- LIÊN KẾT -->
-      <div class="col-md-3 mb-4 fade-in ">
-        <h6 class="mb-3">LIÊN KẾT</h6>
-        <ul class="list-unstyled">
-          <li><a href="index.html">Về chúng tôi</a></li>
-          <li><a href="index.html">sản phẩm</a></li>
-          <li><a href="index.html">Điều khoản</a></li>
-          <li><a href="index.html">Liên hệ</a></li>
-          <li><a href="index.html">Tin tức</a></li>
-        </ul>
-      </div>
-
-      <!-- THỰC ĐƠN -->
-      <div class="col-md-3 mb-4 fade-in">
-        <h6 class="mb-3">Chi tiết sản phẩm</h6>
-        <ul class="list-unstyled">
-          <li><a href="#">Chủ đề</a></li>
-          <li><a href="#">Kiểu dáng</a></li>
-          <li><a href="#">Hoa tươi</a></li>
-          <li><a href="#">Đang giảm giá</a></li>
-        </ul>
-      </div>
-
-      <!-- LIÊN HỆ -->
-      <div class="col-md-3 mb-4 fade-in">
-        <h6 class="mb-3">LIÊN HỆ</h6>
-        <p><i class="fas fa-map-marker-alt"></i> 273 An Dương Vương, Q5, TP.HCM</p>
-        <p><i class="fas fa-phone-alt"></i> 0123 456 789 – 0987 654 321</p>
-        <p><i class="fas fa-envelope"></i> abc@domain.com</p>
-        <p><i class="fas fa-envelope"></i> infoabc@domain.com</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="text-center">
-      <p>Copyright © 2022 spark. All Rights Reserved.</p>
-    </div>
-  </div>
+                <div class="text-center">
+                    <p>Copyright © 2022 Spark. All Rights Reserved.</p>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -514,9 +364,4 @@
         });
 
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
 
