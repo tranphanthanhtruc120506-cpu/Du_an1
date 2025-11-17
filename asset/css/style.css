@@ -1,0 +1,139 @@
+
+body {
+      font-family: Arial, sans-serif;
+    }
+    .navbar-nav .nav-item {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    .nav-link {
+      color: rgb(206, 23, 78);
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 10px 15px;
+    }
+    .dropdown-menu {
+      min-width: auto;
+    }
+    .dropdown-menu a {
+      color: palevioletred;
+    }
+    .dropdown-menu a:hover {
+      color: black;
+      background-color: white;
+    }
+.banner-full {
+  width: 100%;
+  height: 100vh; /* Chiếm 100% màn hình */
+  object-fit: cover;
+}
+.search-box {
+  width: 230px;
+}
+.search-box input {
+  height: 38px;
+  border-color: #af0a5c;
+}
+.search-box .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color:#af0a5c;
+}
+.search-input:hover,
+.search-input:focus {
+  border-color: #af0a5c ;
+  box-shadow: 3px 0 3px 0.15rem #e42695;
+}
+
+header .container {
+  white-space: nowrap;
+}
+.dropdown-toggle::after {
+  display: none; 
+}
+.dropdown-menu .dropdown-item {
+  padding: 8px 16px;
+}
+.banner img {
+    width: 100%;
+    height:470px;
+    display: block;
+}
+
+/* ==== FOOTER ==== */
+.footer-section {
+  background: white;
+  animation: fadeTop 0.8s ease;
+}
+
+/* Tiêu đề */
+.footer-section h6 {
+  color: #8B0A20;
+  font-weight: bold;
+}
+
+/* Link */
+.footer-section a {
+  color: #444;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-section a:hover {
+  color: #8B0A20;
+  padding-left: 5px;
+}
+
+/* Icon mạng xã hội */
+.social-icons a {
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 18px;
+  color: #444;
+  transition: 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  transform: scale(1.25) rotate(5deg);
+  color: #8B0A20;
+}
+
+/* Icon liên hệ */
+.footer-section i {
+  margin-right: 8px;
+  color: #8B0A20;
+}
+
+/* Animation fade-in từng cột */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s forwards;
+}
+
+.fade-in:nth-child(1) { animation-delay: 0.2s; }
+.fade-in:nth-child(2) { animation-delay: 0.35s; }
+.fade-in:nth-child(3) { animation-delay: 0.5s; }
+.fade-in:nth-child(4) { animation-delay: 0.65s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation chung */
+@keyframes fadeTop {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

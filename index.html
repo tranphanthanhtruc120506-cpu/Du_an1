@@ -1,155 +1,235 @@
 <!DOCTYPE html>
 <html lang="vn">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Cửa Hàng Hoa Tươi</title>
-    <link href="project.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="khungchinh">
-      <div class="dong1">
-        <div class="cot1">
-          <img src="hinhanh/logo.jpg" />
-        </div>
-        <div class="cot2">
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="project.html"> Trang chủ </a>
-            </li>
-            <li class="nav-item">
-              <a href="#"> chủ đề </a>
-              <ul class="drop-content">
-                <li>
-                  <a> Hoa sinh nhật </a>
-                </li>
-                <li>
-                  <a> Hoa cầu hôn </a>
-                </li>
-                <li>
-                  <a> Hoa tốt nghiệp</a>
-                </li>
-                <li>
-                  <a> Hoa khai trương </a>
-                </li>
-                <li>
-                  <a> Hoa tình yêu </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#"> Kiểu dáng </a>
-              <ul class="drop-content">
-                <li>
-                  <a> Bó hoa </a>
-                </li>
-                <li>
-                  <a> Giỏ hoa </a>
-                </li>
-                <li>
-                  <a> Kệ hoa </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#"> Hoa tươi </a>
-              <ul class="drop-content">
-                <li>
-                  <a> Hoa hồng</a>
-                </li>
-                <li>
-                  <a> Hoa hướng dương </a>
-                </li>
-                <li>
-                  <a> Hoa baby </a>
-                </li>
-                <li>
-                  <a> Hoa cẩm tú cầu </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="cot3">
-          <div action="" id="search-box">
-            <input type="text" id="search-text">
-            <button id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-          </div>
-          <div class="taikhoan">
-            <button id="nguoidung">
-              <ul class="nav">
-              <li class="nav-item1"><i class='bx bx-user'></i>Tài khoản
-              <ul class="abc">
-                <li class="abc1"><a href="#">Đăng nhập</a></li>
-                <li class="abc1"><a href="#">Đăng kí</a></li>
-              </ul>
-              </li>
-              </ul>
-            </button>
-          </div>
-          <div class="giohang">
-            <button id="nguoidung">
-              <a href="#">
-                <i class='bx bx-shopping-bag'></i>Giỏ hàng
-              </a>
-            </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cửa Hàng Hoa Tươi</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome & Boxicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+
+  <!-- Custom CSS -->
+  <link href="asset/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container shadow-sm bg-body">
+  <!-- Header -->
+  <header class="py-2 mb-3 pt-3" >
+  <div class="container d-flex align-items-center justify-content-between gap-3 flex-wrap">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="asset/hinhanh/logo2 (2).png" alt="Logo" class="img-fluid" width="100">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg p-0 mt-2" style="margin-left: -40px;">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Chủ đề</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Hoa sinh nhật</a></li>
+              <li><a class="dropdown-item" href="#">Hoa cầu hôn</a></li>
+              <li><a class="dropdown-item" href="#">Hoa tốt nghiệp</a></li>
+              <li><a class="dropdown-item" href="#">Hoa khai trương</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kiểu dáng</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Bó hoa</a></li>
+              <li><a class="dropdown-item" href="#">Giỏ hoa</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Hoa tươi</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Hoa hồng</a></li>
+              <li><a class="dropdown-item" href="#">Hoa hướng dương</a></li>
+              <li><a class="dropdown-item" href="#">Hoa baby</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Đang giảm giá</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Search + User + Cart -->
+    <div class="mt-2">
+      <form class="search-box position-relative">
+        <input type="text" class="form-control ps-5 search-input" placeholder="Tìm kiếm...">
+        <i class="fa fa-search search-icon"></i>
+      </form>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-nowrap ">
+      <div class="dropdown mt-2" style="margin-left: -10px;">
+        <a class="btn btn-link  p-0 dropdown-toggle" style="color: #d3213f;" data-bs-toggle="dropdown">
+        <i class="bx bx-user fs-3"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+          <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+        </ul>
+      </div>
+    </div>
+      <div>
+        <a class="btn btn-link p-0" style="color: #d3213f;"><i class="bx bx-shopping-bag fs-3 mt-2" style="margin-right: 20px;"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner container">
+    <img src="asset/hinhanh/banner1.png" class="img-fluid rounded-2" alt="Banner hoa">
+  </section>
+
+  <!-- Sản phẩm -->
+  <section class="container">
+    <h3 class="text-center mt-5 mb-5 fw-bold" style="color: rgb(122, 5, 24);">--- ĐANG GIẢM GIÁ ---</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">
+      <!-- SP 1 -->
+      <div class="col">
+        <div class="card h-auto position-relative">
+          <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+          <img src="asset/hinhanh/hoagiamgia/sp1.jpg" class="card-img-top" style="height: 350px;" alt="Hoa 1">
+          <div class="card-body text-center">
+            <h5 class="card-title" style="color: rgb(68, 12, 21);">Nồng nàn tình yêu</h5>
+            <p class="card-text text-danger fw-bold">610,000 VNĐ <s class="text-muted">700,000 VNĐ</s></p>
+            <a href="#" class="btn btn-outline-danger w-100">Đặt hàng</a>
           </div>
         </div>
       </div>
-      <div class="dong2">
-        <div class="banner">
-          <img width="95%" height="500px" style="margin-left: 30px;" src="hinhanh/hoa1.jpg">
+
+      <!-- SP 2 -->
+      <div class="col">
+        <div class="card h-auto position-relative">
+          <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+          <img src="asset/hinhanh/hoagiamgia/sp2.jpg" class="card-img-top" style="height: 350px;" alt="Hoa 1">
+          <div class="card-body text-center">
+            <h5 class="card-title" style="color: rgb(68, 12, 21);">Nồng nàn tình yêu</h5>
+            <p class="card-text text-danger fw-bold">610,000 VNĐ <s class="text-muted">700,000 VNĐ</s></p>
+            <a href="#" class="btn btn-outline-danger w-100">Đặt hàng</a>
+          </div>
         </div>
-        <p class="iii">ĐANG GIẢM GIÁ</p>
-        <div class="sanpham">
-          <div class="gia">
-            <div class="giamgia">
-              -13%
-            </div>
-            <img src="hinhanh/sp1.jpg"/>
-            <p class="chu">Nồng nàng tình yêu</p>
-            <div class="the">
-            <p>610.000 VNĐ&nbsp;&nbsp;&nbsp;<s>700.000 VNĐ</s></p>
-            </div>
-            <div class="chon"><a href="#">Đặt hàng</a></div>
+      </div>
+
+      <!-- SP 3 -->
+      <div class="col">
+        <div class="card h-auto position-relative">
+          <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+          <img src="asset/hinhanh/hoagiamgia/sp3.jpg" class="card-img-top" style="height: 350px;" alt="Hoa 1">
+          <div class="card-body text-center">
+            <h5 class="card-title" style="color: rgb(68, 12, 21);">Nồng nàn tình yêu</h5>
+            <p class="card-text text-danger fw-bold">610,000 VNĐ <s class="text-muted">700,000 VNĐ</s></p>
+            <a href="#" class="btn btn-outline-danger w-100">Đặt hàng</a>
           </div>
-          <div class="gia">
-            <div class="giamgia">
-              -18%
-            </div>
-            <img src="hinhanh/sp2.jpg"/>
-            <p class="chu">Điều hạnh phúc</p>
-            <div class="the">
-            <p>910.000 VNĐ&nbsp;&nbsp;&nbsp;<s>1.110.000 VNĐ</s></p>
-            </div>
-            <div class="chon"><a href="#">Đặt hàng</a></div>
+        </div>
+      </div>
+
+      <!-- SP 4 -->
+      <div class="col">
+        <div class="card h-auto position-relative">
+          <div class="badge position-absolute bg-danger top-0 start-0 m-2 p-2">-13%</div>
+          <img src="asset/hinhanh/hoagiamgia/sp4.jpg" class="card-img-top" style="height: 350px;" alt="Hoa 1">
+          <div class="card-body text-center">
+            <h5 class="card-title" style="color: rgb(68, 12, 21);">Nồng nàn tình yêu</h5>
+            <p class="card-text text-danger fw-bold">610,000 VNĐ <s class="text-muted">700,000 VNĐ</s></p>
+            <a href="#" class="btn btn-outline-danger w-100">Đặt hàng</a>
           </div>
-          <div class="gia">
-            <div class="giamgia">
-              -13%
-            </div>
-            <img src="hinhanh/sp1.jpg"/>
-            <p class="chu">Nồng nàng tình yêu</p>
-            <div class="the">
-            <p>610.000 VNĐ&nbsp;&nbsp;&nbsp;<s>700.000 VNĐ</s></p>
-            </div>
-            <div class="chon"><a href="#">Đặt hàng</a></div>
-          </div>
-          <div class="gia">
-            <div class="giamgia">
-              -13%
-            </div>
-            <img src="hinhanh/sp1.jpg"/>
-            <p class="chu">Nồng nàng tình yêu</p>
-            <div class="the">
-            <p>610.000 VNĐ&nbsp;&nbsp;&nbsp;<s>700.000 VNĐ</s></p>
-            </div>
-            <div class="chon"><a href="#">Đặt hàng</a></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="mt-5 pt-4 pb-3 footer-section" style="border-top: solid 5px rgb(126, 13, 31);">
+  <div class="container">
+    <div class="container">
+
+    <!-- Logo + Đăng ký nhận tin -->
+    <div class="row align-items-center mb-4">
+      <div class="col-md-4 mb-3 text-center text-md-start">
+        <img src="asset/hinhanh/logo2 (2).png" width="140" alt="">
+      </div>
+
+      <div class="col-md-8">
+        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+          <h5 class="m-0 fw-bold me-4" style="color:#8B0A20;">ĐĂNG KÝ NHẬN TIN</h5>
+          <div class="input-group" style="max-width: 350px;">
+            <input type="email" class="form-control" placeholder="Nhập email của bạn">
+            <button  class="btn btn-danger"><a href="index.html" class="text-light">Đăng ký</a></button>
           </div>
         </div>
       </div>
     </div>
-  </body>
+
+    <hr>
+    <div class="row">
+
+      <!-- VỀ CHÚNG TÔI -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">VỀ CHÚNG TÔI</h6>
+        <p>Spark là thương hiệu được thành lập vào năm 2022 với tiêu chí đặt chất lượng sản phẩm lên hàng đầu.</p>
+
+        <div class="social-icons mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- LIÊN KẾT -->
+      <div class="col-md-3 mb-4 fade-in ">
+        <h6 class="mb-3">LIÊN KẾT</h6>
+        <ul class="list-unstyled">
+          <li><a href="index.html">Về chúng tôi</a></li>
+          <li><a href="index.html">sản phẩm</a></li>
+          <li><a href="index.html">Điều khoản</a></li>
+          <li><a href="index.html">Liên hệ</a></li>
+          <li><a href="index.html">Tin tức</a></li>
+        </ul>
+      </div>
+
+      <!-- THỰC ĐƠN -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">Chi tiết sản phẩm</h6>
+        <ul class="list-unstyled">
+          <li><a href="#">Chủ đề</a></li>
+          <li><a href="#">Kiểu dáng</a></li>
+          <li><a href="#">Hoa tươi</a></li>
+          <li><a href="#">Đang giảm giá</a></li>
+        </ul>
+      </div>
+
+      <!-- LIÊN HỆ -->
+      <div class="col-md-3 mb-4 fade-in">
+        <h6 class="mb-3">LIÊN HỆ</h6>
+        <p><i class="fas fa-map-marker-alt"></i> 273 An Dương Vương, Q5, TP.HCM</p>
+        <p><i class="fas fa-phone-alt"></i> 0123 456 789 – 0987 654 321</p>
+        <p><i class="fas fa-envelope"></i> abc@domain.com</p>
+        <p><i class="fas fa-envelope"></i> infoabc@domain.com</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="text-center">
+      <p>Copyright © 2022 spark. All Rights Reserved.</p>
+    </div>
+  </div>
+  </footer>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
