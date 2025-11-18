@@ -1,0 +1,88 @@
+/* asset/css/seller_style.css */
+:root {
+    --main-color: #8B0A20; /* Màu chủ đạo lấy từ index.html */
+    --accent-color: #d3213f;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    background-color: var(--light-bg);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sidebar Menu */
+.sidebar {
+    width: 260px;
+    background: var(--main-color);
+    min-height: 100vh;
+    position: fixed;
+    color: white;
+    transition: all 0.3s;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar .logo-area {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+}
+
+.sidebar .nav-link {
+    color: rgba(255,255,255,0.85);
+    padding: 15px 25px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-left: 5px solid transparent;
+}
+
+.sidebar .nav-link i {
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    background-color: rgba(0,0,0,0.2);
+    color: #fff;
+    border-left: 5px solid #fff;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 30px;
+}
+
+/* Cards & Forms */
+.card-dashboard {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.card-header-custom {
+    background-color: #fff;
+    border-bottom: 2px solid var(--light-bg);
+    padding: 15px 20px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.btn-primary-custom {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #6b0618;
+    color: white;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #444;
+}
