@@ -2,14 +2,14 @@
 const productApi = "data/products.json";
 
 // ======================= DOM =======================
-const searchInput = document.getElementById("search-inp");
+const searchInput  = document.getElementById("search-inp");
 const searchButton = document.getElementById("button-addon2");
-const productList = document.getElementById("product-list");
+const productList  = document.getElementById("product-list");
 
 let cart = [];
 let cartCount = 0;
 
-// ======================= TÌM KIẾM =======================
+// ======================= SEARCH =======================
 if (searchButton && searchInput) {
     searchButton.addEventListener("click", function (e) {
         e.preventDefault();
@@ -18,7 +18,7 @@ if (searchButton && searchInput) {
     });
 }
 
-// ======================= LOAD SẢN PHẨM =======================
+// ======================= LOAD PRODUCTS =======================
 function loadProducts() {
     if (!productList) return;
 
@@ -35,20 +35,20 @@ function loadProducts() {
             }
 
             renderProducts(filtered);
-
             localStorage.removeItem("searching");
         })
         .catch(err => console.error("Lỗi load dữ liệu:", err));
 }
 
-// ======================= RENDER SẢN PHẨM =======================
+// ======================= RENDER PRODUCTS =======================
 function renderProducts(products) {
     productList.innerHTML = "";
 
     if (products.length === 0) {
         productList.innerHTML = `
-            <div class="text-center text-danger fw-bold">Không tìm thấy sản phẩm!</div>
-        `;
+            <div class="text-center text-danger fw-bold">
+                Không tìm thấy sản phẩm!
+            </div>`;
         return;
     }
 
@@ -71,9 +71,10 @@ function renderProducts(products) {
                         <s class="text-muted">${item.priceOld.toLocaleString()} VND</s>
                     </p>
 
-                    <button class="btn btn-danger w-100 mb-2 btn-add" data-index="${index}">
+                    <button class="btn btn-danger w-100 mb-2 btn-buy" data-index="${index}">
                         Đặt hàng
                     </button>
+
                     <button class="btn btn-warning w-100 btn-add-cart" data-index="${index}">
                         <i class='bx bx-cart'></i> Thêm vào giỏ
                     </button>
@@ -85,9 +86,9 @@ function renderProducts(products) {
     attachProductEvents(products);
 }
 
-// ======================= GÁN SỰ KIỆN SAU KHI RENDER =======================
+// ======================= PRODUCT EVENTS =======================
 function attachProductEvents(products) {
-    document.querySelectorAll(".btn-add").forEach(btn => {
+    document.querySelectorAll(".btn-buy").forEach(btn => {
         btn.addEventListener("click", () => {
             addToCart(products[btn.dataset.index], true);
         });
@@ -100,18 +101,19 @@ function attachProductEvents(products) {
     });
 }
 
-// ======================= GIỎ HÀNG =======================
+// ======================= CART =======================
 function addToCart(product, openModal) {
+
     let exist = cart.find(item => item.name === product.name);
 
     if (exist) {
         exist.qty++;
     } else {
         cart.push({
-            name: product.name,
-            img: product.img,
+            name:  product.name,
+            img:   product.img,
             price: product.priceNew,
-            qty: 1
+            qty:   1
         });
     }
 
@@ -120,10 +122,20 @@ function addToCart(product, openModal) {
 
     updateCartUI();
 
-    if (openModal)
+    // Hiện toast khi chỉ "Thêm vào giỏ"
+    if (!openModal) {
+        const toast = new bootstrap.Toast(document.getElementById("toastAddCart"), { delay: 2000 });
+        toast.show();
+    }
+
+    // Nếu là nút "Đặt hàng" -> mở cart modal
+    if (openModal) {
         new bootstrap.Modal(document.getElementById("cartModal")).show();
+    }
 }
 
+
+// ======================= RENDER CART =======================
 function updateCartUI() {
     const tbody = document.getElementById("cart-items");
     let total = 0;
@@ -137,71 +149,82 @@ function updateCartUI() {
             <td><img src="${item.img}" width="50"></td>
             <td>${item.name}</td>
             <td>${item.price.toLocaleString()}</td>
-            <td>${item.qty}</td>
+
+            <td>
+                <input type="number" min="1" value="${item.qty}" 
+                       class="form-control form-control-sm cart-qty" 
+                       data-index="${i}" style="width:70px;">
+            </td>
+
             <td><button class="btn btn-danger btn-sm" onclick="removeItem(${i})">X</button></td>
         </tr>`;
     });
 
     document.getElementById("cart-total").innerText = total.toLocaleString();
+
+    attachQtyEvents();
 }
 
+
+// ======================= UPDATE QUANTITY =======================
+function attachQtyEvents() {
+    document.querySelectorAll(".cart-qty").forEach(input => {
+        input.addEventListener("change", function () {
+            let index = this.dataset.index;
+            let value = parseInt(this.value);
+
+            if (value < 1) value = 1;
+
+            cart[index].qty = value;
+
+            cartCount = cart.reduce((t, i) => t + i.qty, 0);
+            document.getElementById("cart-count").innerText = cartCount;
+
+            updateCartUI();
+        });
+    });
+}
+
+// ======================= REMOVE ITEM =======================
 function removeItem(i) {
     cart.splice(i, 1);
+
     cartCount = cart.reduce((t, i) => t + i.qty, 0);
     document.getElementById("cart-count").innerText = cartCount;
 
     updateCartUI();
 }
 
-// ======================= ĐẶT HÀNG =======================
+// ======================= CHECKOUT =======================
+const cusName    = document.getElementById("cusName");
+const cusPhone   = document.getElementById("cusPhone");
+const cusAddress = document.getElementById("cusAddress");
+
 document.getElementById("checkoutBtn").addEventListener("click", () => {
     new bootstrap.Modal(document.getElementById("checkoutModal")).show();
 });
 
 document.getElementById("confirmOrderBtn").addEventListener("click", () => {
+
     if (!cusName.value || !cusPhone.value || !cusAddress.value) {
         alert("Vui lòng nhập đầy đủ thông tin!");
         return;
     }
 
+    // Reset cart
     cart = [];
     cartCount = 0;
     document.getElementById("cart-count").innerText = 0;
     updateCartUI();
 
-    // đóng modal cũ
-    document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m).hide());
-    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    // Đóng modal hiện tại
+    document.querySelectorAll(".modal.show").forEach(m => bootstrap.Modal.getInstance(m).hide());
+    document.querySelectorAll(".modal-backdrop").forEach(b => b.remove());
 
-    // mở modal hoàn tất
+    // Hiện modal hoàn tất
     new bootstrap.Modal(document.getElementById("doneModal")).show();
 });
 
-// Load sản phẩm lần đầu
+
+// ======================= INIT =======================
 loadProducts();
-
-if (openModal)
-    new bootstrap.Modal(document.getElementById("cartModal")).show();
-function addToCart(product, openModal) {
-    let exist = cart.find(item => item.name === product.name);
-    if (exist) {
-        exist.qty++;
-    } else {
-        cart.push({
-            name: product.name,
-            img: product.img,
-            price: product.priceNew,
-            qty: 1
-        });
-    }
-    cartCount = cart.reduce((t, i) => t + i.qty, 0);
-    document.getElementById("cart-count").innerText = cartCount;
-    updateCartUI();
-    const toastEl = document.getElementById("toastAddCart");
-    const toast = new bootstrap.Toast(toastEl, { delay: 2000 }); // 2 giây tự biến mất
-    toast.show();
-    if (openModal)
-        new bootstrap.Modal(document.getElementById("cartModal")).show();
-}
-
-
