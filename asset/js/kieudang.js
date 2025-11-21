@@ -1,4 +1,4 @@
-const productApi = "data/products.json";
+const productApi = "data/kieudang2.json";
 
 let allProducts = []; // Lưu toàn bộ sản phẩm
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -62,13 +62,13 @@ function renderCategories() {
   container.innerHTML = "";
 
   const groups = {
-    giamgia: allProducts.filter((p) => p.category === "giamgia"),
-    spmoi: allProducts.filter((p) => p.category === "spmoi"),
+    bohoa: allProducts.filter((p) => p.category === "bohoa"),
+    giohoa: allProducts.filter((p) => p.category === "giohoa"),
   };
 
   const titles = {
-    giamgia: "--- Đang giảm giá ---",
-    spmoi: "--- Sản Phẩm Mới ---",
+    bohoa: "--- BÓ HOA ---",
+    giohoa: "--- GIỎ HOA ---",
   };
 
   Object.keys(groups).forEach((key, idx) => {

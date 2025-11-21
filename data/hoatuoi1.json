@@ -1,0 +1,23 @@
+{
+  "categories": {
+    "hoahong": [
+      "asset/hinhanh/hoatuoi/hoahong/sp1.jpg",
+      "asset/hinhanh/hoatuoi/hoahong/sp2.jpg",
+      "asset/hinhanh/hoatuoi/hoahong/sp3.jpg",
+      "asset/hinhanh/hoatuoi/hoahong/sp4.jpg"
+    ],
+    "hoahuongduong": [
+      "asset/hinhanh/hoatuoi/hoahuongduong/sp1.jpg",
+      "asset/hinhanh/hoatuoi/hoahuongduong/sp2.jpg",
+      "asset/hinhanh/hoatuoi/hoahuongduong/sp3.jpg",
+      "asset/hinhanh/hoatuoi/hoahuongduong/sp4.jpg"
+    ],
+    "hoababy": [
+      "asset/hinhanh/hoatuoi/hoababy/sp1.jpg",
+      "asset/hinhanh/hoatuoi/hoababy/sp2.jpg",
+      "asset/hinhanh/hoatuoi/hoababy/sp3.jpg",
+      "asset/hinhanh/hoatuoi/hoababy/sp4.jpg"
+    ]
+  }
+}
+

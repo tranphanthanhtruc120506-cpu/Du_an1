@@ -1,0 +1,92 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Hoa Hồng Phấn Xinh Tươi",
+      "category": "bohoa",
+      "topic": "Kiểu dáng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/bohoa/sp1.jpg",
+      "priceNew": 560000,
+      "status": "Enabled"
+    },
+    {
+      "id": 2,
+      "name": "Hoa Hồng Pastel Sang Trọng",
+      "category": "bohoa",
+      "topic": "Kiểu dáng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/bohoa/sp2.jpg",
+      "priceNew": 470000,
+      "status": "Enabled"
+    },
+    {
+      "id": 3,
+      "name": "Hoa Tình Yêu Ngập Ngàn",
+      "category": "bohoa",
+      "topic": "Kiểu dáng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/bohoa/sp3.jpg",
+      "priceNew": 590000,
+      "status": "Enabled"
+    },
+    {
+      "id": 4,
+      "name": "Hoa pastel sang trọng",
+      "category": "bohoa",
+      "topic": "Kiểu dáng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/bohoa/sp4.jpg",
+      "priceNew": 659000,
+      "status": "Enabled"
+    },
+    {
+      "id": 5,
+      "name": "Rực Rỡ Chói Chang",
+      "category": "giohoa",
+      "topic":"Kiểu dáng",
+      "style": "giohoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/giohoa/sp1.jpg",
+      "priceNew": 579000,
+      "status": "Enabled"
+    },
+    {
+      "id": 6,
+      "name": "Trong Trẻo Sương Mai",
+      "category": "giohoa",
+      "topic": "Kiểu dáng",
+      "style": "giohoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/giohoa/sp2.jpg",
+      "priceNew": 520000,
+      "status": "Enabled"
+    },
+    {
+      "id": 7,
+      "name": "Sương Mai Ngày Mới",
+      "category": "giohoa",
+      "topic": "Kiểu dáng",
+      "style": "giohoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/giohoa/sp1.jpg",
+      "priceNew": 565000,
+      "status": "Enabled"
+    },
+    {
+      "id": 8,
+      "name": "Hơi thở mùa xuân",
+      "category": "giohoa",
+      "topic": "Kiểu dáng",
+      "style": "giohoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/kieudang/giohoa/sp4.jpg",
+      "priceNew": 770000,
+      "status": "Enabled"
+    }
+  ]
+}

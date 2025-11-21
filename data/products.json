@@ -2,7 +2,8 @@
   {
     "id": 1,
     "name": "Nồng nàn tình yêu",
-    "topic": "không",
+    "category": "giamgia",
+    "topic": "giảm giá",
     "style": "bó hoa",
     "flower": "hoa hồng",
     "salePercent": 13,
@@ -14,7 +15,8 @@
   {
     "id": 2,
     "name": "Hoa hướng dương rực rỡ",
-    "topic": "không",
+    "category": "giamgia",
+    "topic": "giảm giá",
     "style": "bó hoa",
     "flower": "hoa hướng dương",
     "salePercent": 13,
@@ -26,6 +28,7 @@
   {
     "id": 3,
     "name": "Sắc hoa dịu dàng",
+    "category": "giamgia",
     "topic": "không",
     "style": "giỏ hoa",
     "flower": "baby",
@@ -38,13 +41,67 @@
   {
     "id": 4,
     "name": "Hoa pastel sang trọng",
-    "topic": "không",
+    "category": "spmoi",
+    "topic": "giảm giá",
     "style": "giỏ hoa",
     "flower": "hoa hồng",
     "salePercent": 15,
     "img": "asset/hinhanh/hoagiamgia/sp4.jpg",
     "priceNew": 689000,
     "priceOld": 790000,
+    "status": "Enabled"
+  },
+
+  {
+    "id": 5,
+    "name": "Yêu thương ngọt ngào",
+    "category": "spmoi",
+    "topic": "giảm giá",
+    "style": "giỏ hoa",
+    "flower": "hoa hồng pastel",
+    "salePercent": 10,
+    "img": "asset/hinhanh/kieudang/giohoa/sp2.jpg",
+    "priceNew": 450000,
+    "priceOld": 500000,
+    "status": "Enabled"
+  },
+  {
+    "id": 6,
+    "name": "Thanh khiết nhẹ nhàng",
+    "category": "spmoi",
+    "topic": "giảm giá",
+    "style": "giỏ hoa",
+    "flower": "hoa hồng",
+    "salePercent": 12,
+    "img": "asset/hinhanh/kieudang/giohoa/sp3.jpg",
+    "priceNew": 620000,
+    "priceOld": 700000,
+    "status": "Enabled"
+  },
+  {
+    "id": 7,
+    "name": "Sức sống rực rỡ",
+    "category": "spmoi",
+    "topic": "giảm giá",
+    "style": "bó hoa",
+    "flower": "hoa baby",
+    "salePercent": 14,
+    "img": "asset/hinhanh/hoatuoi/hoababy/sp2.jpg",
+    "priceNew": 530000,
+    "priceOld": 620000,
+    "status": "Enabled"
+  },
+  {
+    "id": 8,
+    "name": "Hơi thở mùa xuân",
+    "category": "giamgia",
+    "topic": "giảm giá",
+    "style": "bó hoa",
+    "flower": "hoa hướng dương",
+    "salePercent": 18,
+    "img": "asset/hinhanh/hoatuoi/hoahuongduong/sp2.jpg",
+    "priceNew": 570000,
+    "priceOld": 690000,
     "status": "Enabled"
   }
 ]

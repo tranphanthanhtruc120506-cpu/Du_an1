@@ -1,0 +1,16 @@
+{
+  "categories": {
+    "bohoa": [
+      "asset/hinhanh/kieudang/bohoa/sp1.jpg",
+      "asset/hinhanh/kieudang/bohoa/sp2.jpg",
+      "asset/hinhanh/kieudang/bohoa/sp3.jpg",
+      "asset/hinhanh/kieudang/bohoa/sp4.jpg"
+    ],
+    "giohoa": [
+      "asset/hinhanh/kieudang/giohoa/sp1.jpg",
+      "asset/hinhanh/kieudang/giohoa/sp2.jpg",
+      "asset/hinhanh/kieudang/giohoa/sp3.jpg",
+      "asset/hinhanh/kieudang/giohoa/sp4.jpg"
+    ]
+  }
+}

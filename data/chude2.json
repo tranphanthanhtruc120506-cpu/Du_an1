@@ -1,0 +1,180 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Tỏa Ngát Hương Hoa",
+      "category": "hoasinhnhat",
+      "topic": "hoa sinh nhat",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/chude/hoasinhnhat/sp1.jpg",
+      "priceNew": 560000,
+      "status": "Enabled"
+    },
+    {
+      "id": 2,
+      "name": "Ngọt Ngào Tình Yêu",
+      "category": "hoasinhnhat",
+      "topic": "hoa sinh nhat",
+      "style": "bó hoa",
+      "flower": "hoa hướng dương",
+      "img": "asset/hinhanh/chude/hoasinhnhat/sp2.jpg",
+      "priceNew": 570000,
+      "status": "Enabled"
+    },
+    {
+      "id": 3,
+      "name": "Ánh Mặt Trời Mới",
+      "category": "hoasinhnhat",
+      "topic": "hoa sinh nhat",
+      "style": "bó hoa",
+      "flower": "baby",
+      "img": "asset/hinhanh/chude/hoasinhnhat/sp3.jpg",
+      "priceNew": 720000,
+      "status": "Enabled"
+    },
+    {
+      "id": 4,
+      "name": "Hoa Phấn Ngọt Ngào",
+      "category": "hoasinhnhat",
+      "topic": "hoa sinh nhat",
+      "style": "giỏ hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/chude/hoasinhnhat/sp4.jpg",
+      "priceNew": 699000,
+      "status": "Enabled"
+    },
+    {
+      "id": 5,
+      "name": "Hoa Hồng Đỏ Rực",
+      "category": "hoacauhon",
+      "topic": "hoa cầu hôn",
+      "style": "bó hoa",
+      "flower": "hoa hồng pastel",
+      "img": "asset/hinhanh/chude/hoacauhon/sp1.jpg",
+      "priceNew": 485000,
+      "status": "Enabled"
+    },
+    {
+      "id": 6,
+      "name": "Thuần Khiết Giản Đơn",
+      "category": "hoacauhon",
+      "topic": "hoa cầu hôn",
+      "style": "giỏ hoa",
+      "flower": "hoa ly",
+      "img": "asset/hinhanh/chude/hoacauhon/sp2.jpg",
+      "priceNew": 670000,
+      "status": "Enabled"
+    },
+    {
+      "id": 7,
+      "name": "Sức sống rực rỡ",
+      "category": "hoacauhon",
+      "topic": "hoa cầu hôn",
+      "style": "bó hoa",
+      "flower": "mix",
+      "img": "asset/hinhanh/chude/hoacauhon/sp3.jpg",
+      "priceNew": 530000,
+      "status": "Enabled"
+    },
+    {
+      "id": 8,
+      "name": "Hơi thở mùa xuân",
+      "category": "hoacauhon",
+      "topic": "hoa cầu hôn",
+      "style": "giỏ hoa",
+      "flower": "cúc tana",
+      "img": "asset/hinhanh/chude/hoacauhon/sp4.jpg",
+      "priceNew": 570000,
+      "status": "Enabled"
+    },
+    {
+      "id": 9,
+      "name": "Sắc tím mộng mơ",
+      "category": "hoakhaitruong",
+      "topic": "hoa khai trương",
+      "style": "bó hoa",
+      "flower": "oải hương",
+      "img": "asset/hinhanh/chude/hoakhaitruong/sp1.jpg",
+      "priceNew": 490000,
+      "status": "Enabled"
+    },
+    {
+      "id": 10,
+      "name": "Khởi đầu tốt đẹp",
+      "category": "hoakhaitruong",
+      "topic": "hoa khai trương",
+      "style": "giỏ hoa",
+      "flower": "hồng đỏ",
+      "img": "asset/hinhanh/chude/hoakhaitruong/sp2.jpg",
+      "priceNew": 720000,
+      "status": "Enabled"
+    },
+    {
+      "id": 11,
+      "name": "Yên bình nhẹ nhàng",
+      "category": "hoakhaitruong",
+      "topic": "hoa khai trương",
+      "style": "kệ hoa",
+      "flower": "cúc trắng",
+      "img": "asset/hinhanh/chude/hoakhaitruong/sp3.jpg",
+      "priceNew": 800000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Tỏa sáng kiêu sa",
+      "category": "hoakhaitruong",
+      "topic": "hoa khai trương",
+      "style": "giỏ hoa",
+      "flower": "lan hồ điệp",
+      "img": "asset/hinhanh/chude/hoakhaitruong/sp4.jpg",
+      "priceNew": 950000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Tỏa sáng kiêu sa",
+      "category": "hoatotnghiep",
+      "topic": "hoa tốt nghiệp",
+      "style": "giỏ hoa",
+      "flower": "lan hồ điệp",
+      "img": "asset/hinhanh/chude/hoatotnghiep/sp1.jpg",
+      "priceNew": 950000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Tỏa sáng kiêu sa",
+      "category": "hoatotnghiep",
+      "topic": "hoa tốt nghiệp",
+      "style": "giỏ hoa",
+      "flower": "lan hồ điệp",
+      "img": "asset/hinhanh/chude/hoatotnghiep/sp2.jpg",
+      "priceNew": 950000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Tỏa sáng kiêu sa",
+      "category": "hoatotnghiep",
+      "topic": "hoa tốt nghiệp",
+      "style": "giỏ hoa",
+      "flower": "lan hồ điệp",
+      "img": "asset/hinhanh/chude/hoatotnghiep/sp3.jpg",
+      "priceNew": 950000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Tỏa sáng kiêu sa",
+      "category": "hoatotnghiep",
+      "topic": "hoa tốt nghiệp",
+      "style": "giỏ hoa",
+      "flower": "lan hồ điệp",
+      "img": "asset/hinhanh/chude/hoatotnghiep/sp4.jpg",
+      "priceNew": 950000,
+      "status": "Enabled"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Hoa Yêu Thương Tươi Thắm",
+      "category": "hoahong",
+      "topic": "hoa hồng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/hoatuoi/hoahong/sp1.jpg",
+      "priceNew": 799000,
+      "status": "Enabled"
+    },
+    {
+      "id": 2,
+      "name": "Hoa Ngọt Ngào Mùa Thương",
+      "category": "hoahong",
+      "topic": "hoa hồng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/hoatuoi/hoahong/sp2.jpg",
+      "priceNew": 469000,
+      "status": "Enabled"
+    },
+    {
+      "id": 3,
+      "name": "Hoa Tình Yêu Ngập Ngàn",
+      "category": "hoahong",
+      "topic": "hoa hồng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/hoatuoi/hoahong/sp3.jpg",
+      "priceNew": 499000,
+      "status": "Enabled"
+    },
+    {
+      "id": 4,
+      "name": "Thầm Thương Trộm Nhớ",
+      "category": "hoahong",
+      "topic": "hoa hồng",
+      "style": "bó hoa",
+      "flower": "hoa hồng",
+      "img": "asset/hinhanh/hoatuoi/hoahong/sp4.jpg",
+      "priceNew": 659000,
+      "status": "Enabled"
+    },
+    {
+      "id": 5,
+      "name": "Rực Rỡ Chói Chang",
+      "category": "hoahuongduong",
+      "topic":"hoa hướng dương",
+      "style": "bó hoa",
+      "flower": "hoa hướng dương",
+      "img": "asset/hinhanh/hoatuoi/hoahuongduong/sp1.jpg",
+      "priceNew": 579000,
+      "status": "Enabled"
+    },
+    {
+      "id": 6,
+      "name": "Mặt Trời Lặn",
+      "category": "hoahuongduong",
+      "topic": "hoa hướng dương",
+      "style": "bó hoa",
+      "flower": "hoa hướng dương",
+      "img": "asset/hinhanh/hoatuoi/hoahuongduong/sp2.jpg",
+      "priceNew": 570000,
+      "status": "Enabled"
+    },
+    {
+      "id": 7,
+      "name": "Tỏa Nắng Ngày Mới",
+      "category": "hoahuongduong",
+      "topic": "hoa tươi",
+      "style": "hoa hướng dương",
+      "flower": "hoa hướng dương",
+      "img": "asset/hinhanh/hoatuoi/hoahuongduong/sp3.jpg",
+      "priceNew": 515000,
+      "status": "Enabled"
+    },
+    {
+      "id": 8,
+      "name": "Nắng Chiếu Khung Cửa",
+      "category": "hoahuongduong",
+      "topic": "hoa hướng dương",
+      "style": "bó hoa",
+      "flower": "hoa hướng dương",
+      "img": "asset/hinhanh/hoatuoi/hoahuongduong/sp4.jpg",
+      "priceNew": 770000,
+      "status": "Enabled"
+    },
+    {
+      "id": 9,
+      "name": "Nhẹ Nhàng Sắc Xuân",
+      "category": "hoababy",
+      "topic": "hoa baby",
+      "style": "bó hoa",
+      "flower": "hoa baby",
+      "img": "asset/hinhanh/hoatuoi/hoababy/sp1.jpg",
+      "priceNew": 790000,
+      "status": "Enabled"
+    },
+    {
+      "id": 10,
+      "name": "Bầu Trời Ngát Hương",
+      "category": "hoababy",
+      "topic": "hoa baby",
+      "style": "bó hoa",
+      "flower": "hoa baby",
+      "img": "asset/hinhanh/hoatuoi/hoababy/sp2.jpg",
+      "priceNew": 870000,
+      "status": "Enabled"
+    },
+    {
+      "id": 11,
+      "name": "Nhẹ Nhàng Tinh Tế",
+      "category": "hoababy",
+      "topic": "hoa baby",
+      "style": "bó hoa",
+      "flower": "hoa baby",
+      "img": "asset/hinhanh/hoatuoi/hoababy/sp3.jpg",
+      "priceNew": 699000,
+      "status": "Enabled"
+    },
+    {
+      "id": 12,
+      "name": "Nắng Chiếu Khung Cửa",
+      "category": "hoababy",
+      "topic": "hoa baby",
+      "style": "bó hoa",
+      "flower": "hoa baby",
+      "img": "asset/hinhanh/hoatuoi/hoababy/sp4.jpg",
+      "priceNew": 569000,
+      "status": "Enabled"
+    }
+  ]
+}

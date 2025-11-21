@@ -1,0 +1,28 @@
+{
+  "categories": {
+    "hoasinhnhat": [
+      "asset/hinhanh/chude/hoasinhnhat/sp1.jpg",
+      "asset/hinhanh/chude/hoasinhnhat/sp2.jpg",
+      "asset/hinhanh/chude/hoasinhnhat/sp3.jpg",
+      "asset/hinhanh/chude/hoasinhnhat/sp4.jpg"
+    ],
+    "hoacauhon": [
+      "asset/hinhanh/chude/hoacauhon/sp1.jpg",
+      "asset/hinhanh/chude/hoacauhon/sp2.jpg",
+      "asset/hinhanh/chude/hoacauhon/sp3.jpg",
+      "asset/hinhanh/chude/hoacauhon/sp4.jpg"
+    ],
+    "hoakhaitruong": [
+      "asset/hinhanh/chude/hoakhaitruong/sp1.jpg",
+      "asset/hinhanh/chude/hoakhaitruong/sp2.jpg",
+      "asset/hinhanh/chude/hoakhaitruong/sp3.jpg",
+      "asset/hinhanh/chude/hoakhaitruong/sp4.jpg"
+    ],
+    "hoatotnghiep": [
+      "asset/hinhanh/chude/hoatotnghiep/sp1.jpg",
+      "asset/hinhanh/chude/hoatotnghiep/sp2.jpg",
+      "asset/hinhanh/chude/hoatotnghiep/sp3.jpg",
+      "asset/hinhanh/chude/hoatotnghiep/sp4.jpg"
+    ]
+  }
+}

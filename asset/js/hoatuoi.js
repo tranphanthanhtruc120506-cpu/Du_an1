@@ -1,4 +1,4 @@
-const productApi = "data/products.json";
+const productApi = "data/hoatuoi2.json";
 
 let allProducts = []; // Lưu toàn bộ sản phẩm
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -62,13 +62,15 @@ function renderCategories() {
   container.innerHTML = "";
 
   const groups = {
-    giamgia: allProducts.filter((p) => p.category === "giamgia"),
-    spmoi: allProducts.filter((p) => p.category === "spmoi"),
+    hoahong: allProducts.filter((p) => p.category === "hoahong"),
+    hoahuongduong: allProducts.filter((p) => p.category === "hoahuongduong"),
+    hoababy: allProducts.filter((p) => p.category === "hoababy"),
   };
 
   const titles = {
-    giamgia: "--- Đang giảm giá ---",
-    spmoi: "--- Sản Phẩm Mới ---",
+    hoahong: "--- Hoa Hồng ---",
+    hoahuongduong: "--- Hoa Hướng Dương ---",
+    hoababy: "--- Hoa Baby ---",
   };
 
   Object.keys(groups).forEach((key, idx) => {
