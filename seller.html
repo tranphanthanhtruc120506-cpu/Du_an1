@@ -12,44 +12,65 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="asset/css/seller_style.css" />
   </head>
   <body>
-    <div class="sidebar">
-      <div class="logo-area" style="display: flex">
-        <img src="asset/hinhanh/logo2 (2).png" width="150" class="bg-white" />
-        <h5 class="mt-4 fs-3 text-danger fw-bold" style="margin-left: 650px">
-          SPARK SELLER
-        </h5>
+    <div
+      class="seller-header d-flex align-items-center justify-content-between px-4 py-3 shadow-sm"
+    >
+      <div class="d-flex align-items-center">
+        <img src="asset/hinhanh/logo2 (2).png" width="120" class="me-3" />
       </div>
-      <ul class="nav flex-column mt-3">
+
+      <h3 class="fw-bold m-0" style="color: #a1152c">SPARK SELLER</h3>
+
+      <div style="width: 120px"></div>
+    </div>
+
+    <div class="sidebar">
+      <ul class="nav flex-column mt-4">
         <li class="nav-item">
-          <a href="seller.html" class="nav-link"
-            ><i class="fas fa-chart-line"></i> Tổng quan</a
+          <a
+            href="seller.html"
+            class="nav-link active fs-4 fw-bold"
+            style="color: #d3213f"
           >
+            <i class="fas fa-chart-line me-2 fs-3"></i> Tổng quan
+          </a>
         </li>
         <li class="nav-item">
-          <a href="seller_product.html" class="nav-link active"
-            ><i class="fas fa-box-open"></i> Sản phẩm</a
+          <a
+            href="seller_product.html"
+            class="nav-link fs-4 fw-bold"
+            style="color: #d3213f"
           >
+            <i class="fas fa-box-open me-2"></i> Sản phẩm
+          </a>
         </li>
         <li class="nav-item">
-          <a href="seller_orders.html" class="nav-link"
-            ><i class="fas fa-shopping-cart"></i> Đơn hàng</a
+          <a
+            href="seller_orders.html"
+            class="nav-link fs-4 fw-bold"
+            style="color: #d3213f"
           >
+            <i class="fas fa-shopping-cart me-2"></i> Đơn hàng
+          </a>
         </li>
         <li class="nav-item">
-          <a href="index.html" class="nav-link"
-            ><i class="fas fa-sign-out-alt"></i> Về trang chủ</a
+          <a
+            href="index.html"
+            class="nav-link fs-4 fw-bold"
+            style="color: #d3213f"
           >
+            <i class="fas fa-sign-out-alt me-2"></i> Về trang chủ
+          </a>
         </li>
       </ul>
     </div>
 
     <div class="main-content">
       <h2
-        class="mb-4 fw-bold text-danger text-center"
-        style="color: var(--main-color)"
+        class="mb-4 fw-bold text-center text-uppercase"
+        style="color: #31020a"
       >
         Tổng quan kinh doanh
       </h2>
@@ -57,36 +78,95 @@
       <div class="row g-4 mb-4">
         <div class="col-md-4">
           <div class="card card-dashboard bg-warning text-dark p-3">
-            <h4><i class="fas fa-money-bill-wave"></i> Doanh thu ngày</h4>
-            <h2 class="fw-bold">1.500.000đ</h2>
+            <h4><i class="fas fa-money-bill-wave"></i> Tổng Doanh Thu</h4>
+            <h2 class="fw-bold" id="revenueDisplay">0đ</h2>
           </div>
         </div>
+
         <div class="col-md-4">
           <div
-            class="card card-dashboard text-bg-light p-3"
-            style="background-color: var(--main-color)"
+            class="card card-dashboard text-white p-3"
+            style="background-color: #d3213f"
           >
-            <h4><i class="fas fa-shopping-bag"></i> Đơn mới</h4>
-            <h2 class="fw-bold">05</h2>
+            <h4><i class="fas fa-shopping-bag"></i> Tổng Đơn Hàng</h4>
+            <h2 class="fw-bold" id="orderDisplay">0</h2>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="card card-dashboard bg-secondary text-white p-3">
-            <h4><i class="fas fa-box"></i> Sản phẩm</h4>
-            <h2 class="fw-bold">24</h2>
+            <h4><i class="fas fa-box"></i> Tổng Sản Phẩm</h4>
+            <h2 class="fw-bold" id="productDisplay">0</h2>
           </div>
         </div>
       </div>
 
       <div class="card card-dashboard">
-        <div class="card-header-custom">Hoạt động gần đây</div>
+        <div class="card-header-custom p-3 fw-bold bg-light border-bottom">
+          Trạng thái hệ thống
+        </div>
         <div class="card-body">
-          <p>Chào mừng bạn đến với trang quản trị Spark Flower!</p>
-          <a href="seller_product.html" class="btn btn-primary-custom"
-            >Quản lý sản phẩm ngay</a
+          <p>Dữ liệu đang được lấy từ LocalStorage.</p>
+          <a href="seller_orders.html" class="btn btn-danger mt-2"
+            >Xem chi tiết đơn hàng</a
           >
         </div>
       </div>
     </div>
+
+    <script>
+      function loadDashboard() {
+        console.log("Đang tính toán số liệu...");
+
+        // 1. Lấy dữ liệu
+        const products = JSON.parse(localStorage.getItem("products") || "[]");
+        const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+
+        console.log(
+          "Tìm thấy:",
+          products.length,
+          "sản phẩm và",
+          orders.length,
+          "đơn hàng"
+        );
+
+        // 2. Tính TỔNG SẢN PHẨM
+        document.getElementById("productDisplay").innerText = products.length;
+
+        // 3. Tính TỔNG DOANH THU & TỔNG ĐƠN HÀNG (Tính hết, không lọc ngày nữa)
+        const totalOrders = orders.length;
+
+        // Cộng dồn tiền của tất cả đơn hàng
+        const totalRevenue = orders.reduce((total, order) => {
+          return total + (parseInt(order.total) || 0);
+        }, 0);
+
+        // 4. Hiển thị lên giao diện
+        document.getElementById("revenueDisplay").innerText =
+          totalRevenue.toLocaleString() + "đ";
+        document.getElementById("orderDisplay").innerText = totalOrders;
+      }
+
+      // Hàm test: Nếu bấm nút này mà số nhảy -> Code đúng, do bạn chưa có đơn hàng thật
+      function testData() {
+        const fakeOrder = {
+          id: "TEST",
+          total: 500000,
+          date: new Date().toLocaleString(),
+          customer: {},
+          items: [],
+        };
+        let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        orders.push(fakeOrder);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        loadDashboard(); // Tính lại ngay
+        alert(
+          "Đã thêm 1 đơn hàng giả trị giá 500k. Hãy nhìn số liệu thay đổi!"
+        );
+      }
+
+      // Chạy ngay khi tải trang
+      document.addEventListener("DOMContentLoaded", loadDashboard);
+    </script>
   </body>
 </html>

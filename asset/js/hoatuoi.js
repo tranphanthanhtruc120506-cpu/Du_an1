@@ -285,7 +285,7 @@ function removeFromCart(i) {
 
 // ======================= CHECKOUT =======================
 document.getElementById("checkoutBtn")?.addEventListener("click", () => {
-  updateCartUI(); // Cập nhật lại giỏ hàng trước khi hiện modal
+  updateCartUI();
   new bootstrap.Modal(document.getElementById("checkoutModal")).show();
 });
 
@@ -293,23 +293,56 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
   const name = document.getElementById("cusName").value.trim();
   const phone = document.getElementById("cusPhone").value.trim();
   const address = document.getElementById("cusAddress").value.trim();
+  const payment = document.getElementById("paymentMethod").value;
 
   if (!name || !phone || !address) {
     alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
     return;
   }
 
-  // Xóa giỏ hàng sau khi đặt thành công
+  // 1. TẠO ĐƠN HÀNG
+  const newOrder = {
+    id: "DH" + Date.now(),
+    customer: { name, phone, address, payment },
+    items: cart,
+    total: cart.reduce((t, i) => t + i.price * i.qty, 0),
+    date: new Date().toLocaleString(),
+    status: "Chờ xử lý",
+  };
+
+  // 2. LƯU VÀO LOCALSTORAGE "orders"
+  let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+  orders.unshift(newOrder);
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  // 3. XÓA GIỎ HÀNG & RESET
   cart = [];
   localStorage.removeItem("cart");
   document.getElementById("cart-count").innerText = "0";
   updateCartUI();
 
-  // Đóng modal checkout
-  bootstrap.Modal.getInstance(document.getElementById("checkoutModal")).hide();
+  // 4. ĐÓNG CÁC MODAL
+  const checkoutModalEl = document.getElementById("checkoutModal");
+  const checkoutModal = bootstrap.Modal.getInstance(checkoutModalEl);
+  if (checkoutModal) checkoutModal.hide();
 
-  // Hiện thông báo thành công
-  new bootstrap.Modal(document.getElementById("doneModal")).show();
+  const cartModalEl = document.getElementById("cartModal");
+  let cartModal = bootstrap.Modal.getInstance(cartModalEl);
+  if (!cartModal && cartModalEl) {
+    cartModal = new bootstrap.Modal(cartModalEl);
+  }
+  if (cartModal) cartModal.hide();
+
+  // 5. HIỆN THÔNG BÁO & TỰ ẨN
+  const doneModal = new bootstrap.Modal(document.getElementById("doneModal"));
+  doneModal.show();
+
+  setTimeout(() => {
+    doneModal.hide();
+    document.getElementById("cusName").value = "";
+    document.getElementById("cusPhone").value = "";
+    document.getElementById("cusAddress").value = "";
+  }, 2000);
 });
 
 // ======================= KHỞI ĐỘNG =======================

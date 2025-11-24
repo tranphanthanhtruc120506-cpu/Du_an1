@@ -1,6 +1,5 @@
-// ======================= API =======================
+// ======================= API & KHỞI TẠO =======================
 const productApi = "data/products.json";
-
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -35,7 +34,6 @@ function loadProducts() {
       const query = (localStorage.getItem("searchQuery") || "")
         .toLowerCase()
         .trim();
-
       localStorage.removeItem("searchQuery");
 
       const container = document.getElementById("products-container");
@@ -52,10 +50,9 @@ function loadProducts() {
             p.style?.toLowerCase().includes(query)
           );
         });
-
         renderSearchResults(query, result);
       } else {
-        renderCategories();
+        renderCategories(); // Giữ nguyên giao diện chia danh mục
       }
     })
     .catch((err) => {
@@ -69,10 +66,11 @@ function loadProducts() {
     });
 }
 
-// ======================= TRANG CHỦ =======================
+// ======================= TRANG CHỦ (GIAO DIỆN CŨ) =======================
 function renderCategories() {
   const container = document.getElementById("products-container");
 
+  // Phân nhóm sản phẩm như cũ
   const groups = {
     giamgia: allProducts.filter((p) => p.category === "giamgia"),
     spmoi: allProducts.filter((p) => p.category === "spmoi"),
@@ -112,7 +110,7 @@ function renderCategories() {
   attachEvents();
 }
 
-// ======================= CARD HTML =======================
+// Giao diện thẻ Card cũ của bạn
 function cardHTML(item) {
   return `
     <div class="col-6 col-md-4 col-lg-3">
@@ -125,14 +123,23 @@ function cardHTML(item) {
             : ""
         }
 
-        <img src="${item.img}" 
-             class="card-img-top"
-             style="height:320px;object-fit:cover;"
-             onerror="this.src='asset/notfound.jpg'"
-             alt="${item.name}">
+        <a href="sanphamchitiet.html?id=${item.id}">
+          <img src="${item.img}" 
+               class="card-img-top"
+               style="height:320px;object-fit:cover;cursor:pointer;"
+               onerror="this.src='asset/notfound.jpg'"
+               alt="${item.name}">
+        </a>
 
         <div class="card-body text-center d-flex flex-column">
-          <h5 class="card-title mb-2" style="color:#5D001E;">${item.name}</h5>
+
+          <a href="sanphamchitiet.html?id=${
+            item.id
+          }" class="text-decoration-none">
+            <h5 class="card-title mb-2" style="color:#5D001E;cursor:pointer;">
+              ${item.name}
+            </h5>
+          </a>
 
           <p class="text-danger fw-bold fs-5 mb-1">
             ${item.priceNew.toLocaleString()} VNĐ
@@ -148,7 +155,6 @@ function cardHTML(item) {
           }">
             Đặt hàng
           </button>
-
           <button class="btn btn-warning btn-add-cart" data-id="${item.id}">
             Thêm vào giỏ
           </button>
@@ -158,11 +164,10 @@ function cardHTML(item) {
   `;
 }
 
-// ======================= KẾT QUẢ TÌM KIẾM  =======================
+// ======================= KẾT QUẢ TÌM KIẾM =======================
 function renderSearchResults(query, products) {
   const container = document.getElementById("products-container");
 
-  // Tiêu đề kết quả
   container.innerHTML = `
     <div class="text-center my-5">
       <h2 class="display-5 fw-bold" style="color:#8b0015;">
@@ -187,7 +192,6 @@ function renderSearchResults(query, products) {
   `;
 
   container.insertAdjacentHTML("beforeend", rowHTML);
-
   attachEvents();
 }
 
@@ -258,7 +262,6 @@ function updateCartUI() {
   document.getElementById("cart-total").innerText =
     total.toLocaleString() + " VNĐ";
 
-  // Cập nhật số lượng khi thay đổi input
   document.querySelectorAll(".qty").forEach((input) => {
     input.onchange = () => {
       let qty = parseInt(input.value) || 1;
@@ -270,7 +273,6 @@ function updateCartUI() {
   });
 }
 
-// ======================= XÓA SẢN PHẨM KHỎI GIỎ =======================
 function removeFromCart(i) {
   cart.splice(i, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -281,9 +283,9 @@ function removeFromCart(i) {
   updateCartUI();
 }
 
-// ======================= CHECKOUT =======================
+// ============================== CHECKOUT ====================================
 document.getElementById("checkoutBtn")?.addEventListener("click", () => {
-  updateCartUI(); // Cập nhật lại giỏ hàng trước khi hiện modal
+  updateCartUI();
   new bootstrap.Modal(document.getElementById("checkoutModal")).show();
 });
 
@@ -291,24 +293,57 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
   const name = document.getElementById("cusName").value.trim();
   const phone = document.getElementById("cusPhone").value.trim();
   const address = document.getElementById("cusAddress").value.trim();
+  const payment = document.getElementById("paymentMethod").value;
 
   if (!name || !phone || !address) {
     alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
     return;
   }
 
-  // Xóa giỏ hàng sau khi đặt thành công
+  // 1. TẠO ĐƠN HÀNG
+  const newOrder = {
+    id: "DH" + Date.now(),
+    customer: { name, phone, address, payment },
+    items: cart,
+    total: cart.reduce((t, i) => t + i.price * i.qty, 0),
+    date: new Date().toLocaleString(),
+    status: "Chờ xử lý",
+  };
+
+  // 2. LƯU VÀO LOCALSTORAGE "orders"
+  let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+  orders.unshift(newOrder);
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  // 3. XÓA GIỎ HÀNG & RESET
   cart = [];
   localStorage.removeItem("cart");
   document.getElementById("cart-count").innerText = "0";
   updateCartUI();
 
-  // Đóng modal checkout
-  bootstrap.Modal.getInstance(document.getElementById("checkoutModal")).hide();
+  // 4. ĐÓNG CÁC MODAL
+  const checkoutModalEl = document.getElementById("checkoutModal");
+  const checkoutModal = bootstrap.Modal.getInstance(checkoutModalEl);
+  if (checkoutModal) checkoutModal.hide();
 
-  // Hiện thông báo thành công
-  new bootstrap.Modal(document.getElementById("doneModal")).show();
+  const cartModalEl = document.getElementById("cartModal");
+  let cartModal = bootstrap.Modal.getInstance(cartModalEl);
+  if (!cartModal && cartModalEl) {
+    cartModal = new bootstrap.Modal(cartModalEl);
+  }
+  if (cartModal) cartModal.hide();
+
+  // 5. HIỆN THÔNG BÁO & TỰ ẨN
+  const doneModal = new bootstrap.Modal(document.getElementById("doneModal"));
+  doneModal.show();
+
+  setTimeout(() => {
+    doneModal.hide();
+    document.getElementById("cusName").value = "";
+    document.getElementById("cusPhone").value = "";
+    document.getElementById("cusAddress").value = "";
+  }, 2000);
 });
 
-// ======================= KHỞI ĐỘNG =======================
+// Chạy load data
 loadProducts();
