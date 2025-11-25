@@ -185,3 +185,31 @@ header .container {
   font-size: 0.8rem;
   padding: 5px 10px;
 }
+
+.feature-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  transition: 0.25s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
+}
+
+.feature-icon {
+  font-size: 32px;
+  color: #b31e2d; /* Màu đỏ chủ đạo */
+}
+
+.feature-title {
+  font-weight: bold;
+  color: #8b0a20;
+}
+
+.feature-text {
+  font-size: 14px;
+  color: #6c6c6c;
+}

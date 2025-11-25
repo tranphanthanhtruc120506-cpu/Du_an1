@@ -39,6 +39,15 @@
         </li>
         <li class="nav-item">
           <a
+            href="seller_category.html"
+            class="nav-link fs-4 fw-bold"
+            style="color: #d3213f"
+          >
+            <i class="fas fa-tags me-2"></i> Danh mục
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
             href="seller_product.html"
             class="nav-link fs-4 fw-bold"
             style="color: #d3213f"
@@ -77,14 +86,19 @@
 
       <div class="row">
         <div class="col-md-4">
-          <div class="card card-dashboard">
-            <div class="card-header-custom">
-              <i class="fas fa-plus-circle me-2"></i>Thêm sản phẩm mới
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white fw-bold py-3 border-bottom">
+              <i class="fas fa-pen-square me-2 text-danger"></i>Thông tin sản
+              phẩm
             </div>
             <div class="card-body">
               <form id="addProductForm">
+                <input type="hidden" id="editId" value="" />
+
                 <div class="mb-3">
-                  <label class="form-label">Tên hoa</label>
+                  <label class="form-label fw-bold small text-muted"
+                    >Tên hoa</label
+                  >
                   <input
                     type="text"
                     class="form-control"
@@ -95,17 +109,16 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Danh mục</label>
-                  <select class="form-select" id="proCategory">
-                    <option value="Hoa sinh nhật">Hoa sinh nhật</option>
-                    <option value="Hoa cầu hôn">Hoa cầu hôn</option>
-                    <option value="Hoa tốt nghiệp">Hoa tốt nghiệp</option>
-                    <option value="Hoa khai trương">Hoa khai trương</option>
-                  </select>
+                  <label class="form-label fw-bold small text-muted"
+                    >Danh mục</label
+                  >
+                  <select class="form-select" id="proCategory"></select>
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Giá bán (VNĐ)</label>
+                  <label class="form-label fw-bold small text-muted"
+                    >Giá bán (VNĐ)</label
+                  >
                   <input
                     type="number"
                     class="form-control"
@@ -115,7 +128,9 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label d-block">Kiểu dáng (Radio)</label>
+                  <label class="form-label fw-bold small text-muted d-block"
+                    >Kiểu dáng</label
+                  >
                   <div class="form-check form-check-inline">
                     <input
                       class="form-check-input"
@@ -140,7 +155,6 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label d-block">Tùy chọn (Checkbox)</label>
                   <div class="form-check">
                     <input
                       class="form-check-input"
@@ -151,51 +165,69 @@
                       >Kèm hộp quà tặng</label
                     >
                   </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="proFast"
-                    />
-                    <label class="form-check-label" for="proFast"
-                      >Giao hỏa tốc 2h</label
-                    >
-                  </div>
                 </div>
 
                 <div class="mb-4">
-                  <label class="form-label">Hình ảnh</label>
+                  <label class="form-label fw-bold small text-muted"
+                    >Hình ảnh</label
+                  >
                   <input type="file" class="form-control" id="proImg" />
+                  <div id="previewImg" class="mt-2 text-center d-none">
+                    <small class="d-block text-muted mb-1">Ảnh hiện tại:</small>
+                    <img
+                      src=""
+                      style="
+                        height: 80px;
+                        border-radius: 5px;
+                        border: 1px solid #ddd;
+                      "
+                    />
+                  </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary-custom w-100 py-2">
-                  <i class="fas fa-save me-2"></i>Lưu sản phẩm
-                </button>
+                <div class="d-grid gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-danger fw-bold"
+                    id="btnSave"
+                  >
+                    <i class="fas fa-save me-2"></i>Lưu sản phẩm
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary d-none"
+                    id="btnCancel"
+                    onclick="resetForm()"
+                  >
+                    Hủy sửa
+                  </button>
+                </div>
               </form>
             </div>
           </div>
         </div>
 
         <div class="col-md-8">
-          <div class="card card-dashboard">
-            <div class="card-header-custom">
-              <i class="fas fa-list me-2"></i>Danh sách hiện có
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-bold py-3 border-bottom">
+              <i class="fas fa-list me-2 text-danger"></i>Danh sách hiện có
             </div>
-            <div class="card-body">
-              <table class="table table-hover align-middle">
-                <thead class="table-light">
-                  <tr>
-                    <th>#</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Danh mục</th>
-                    <th>Giá</th>
-                    <th>Loại</th>
-                    <th>Quà</th>
-                    <th>Xóa</th>
-                  </tr>
-                </thead>
-                <tbody id="productTableBody"></tbody>
-              </table>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Sản phẩm</th>
+                      <th>Danh mục</th>
+                      <th>Giá</th>
+                      <th>Loại</th>
+                      <th class="text-end">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productTableBody"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

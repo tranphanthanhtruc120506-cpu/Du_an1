@@ -1,0 +1,20 @@
+/* --- THÊM ĐOẠN NÀY --- */
+.product-list-item {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 4px;
+}
+.product-list-item:last-child {
+  border-bottom: none;
+}
+.product-list-item img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+}

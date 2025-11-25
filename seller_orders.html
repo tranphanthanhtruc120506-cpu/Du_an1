@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link href="asset/css/selller_orders.css" rel="stylesheet" />
   </head>
   <body>
     <div
@@ -35,6 +36,15 @@
             style="color: #d3213f"
           >
             <i class="fas fa-chart-line me-2 fs-3"></i> Tổng quan
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="seller_category.html"
+            class="nav-link fs-4 fw-bold"
+            style="color: #d3213f"
+          >
+            <i class="fas fa-tags me-2"></i> Danh mục
           </a>
         </li>
         <li class="nav-item">
@@ -74,25 +84,37 @@
       >
         Quản lý đơn hàng
       </h2>
-      <div class="card shadow border-0">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle">
-              <thead class="table-dark">
-                <tr>
-                  <th>Mã Đơn</th>
-                  <th>Ngày đặt</th>
-                  <th>Khách hàng</th>
-                  <th>Sản phẩm</th>
-                  <th>Tổng tiền</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="order-list"></tbody>
-            </table>
-          </div>
-          <div id="empty-msg" class="text-center py-4 d-none">
-            Chưa có đơn hàng nào!
+      <div class="card border-0 shadow-sm p-4" style="border-radius: 15px">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold">
+            <i class="fas fa-list-alt me-2"></i>Danh sách đơn hàng
+          </h5>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            onclick="clearAllOrders()"
+          >
+            <i class="fas fa-trash-alt me-1"></i> Xóa tất cả
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Mã Đơn</th>
+                <th>Ngày đặt</th>
+                <th>Khách hàng</th>
+                <th style="width: 250px">Sản phẩm mua</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th class="text-end">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="order-list"></tbody>
+          </table>
+          <div id="empty-msg" class="text-center py-5 d-none text-muted">
+            <i class="fas fa-box-open fs-1 mb-3 opacity-50"></i>
+            <p>Chưa có đơn hàng nào!</p>
           </div>
         </div>
       </div>
@@ -108,7 +130,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Chi tiết đơn hàng</h5>
+            <h5 class="modal-title fw-bold">Chi tiết đơn hàng</h5>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body" id="modal-body-detail"></div>
@@ -117,74 +139,124 @@
     </div>
 
     <script>
-      // --- PHẦN DEBUG (KIỂM TRA LỖI) ---
-      function checkDebug() {
-        const data = localStorage.getItem("orders");
-        if (!data) {
-          console.log(
-            "DEBUG: Không tìm thấy dữ liệu 'orders' trong LocalStorage."
-          );
-          // alert("Chưa có đơn hàng nào được lưu trong bộ nhớ trình duyệt!");
-        } else {
-          const parsed = JSON.parse(data);
-          console.log("DEBUG: Tìm thấy " + parsed.length + " đơn hàng.");
-        }
-      }
+      const STATUS_MAP = {
+        "Chờ xử lý": "status-cho-xu-ly",
+        "Đang giao": "status-dang-giao",
+        "Hoàn tất": "status-hoan-tat",
+        "Đã hủy": "status-da-huy",
+      };
 
-      // --- PHẦN HIỂN THỊ CHÍNH ---
       function renderOrderTable() {
         const tbody = document.getElementById("order-list");
         const emptyMsg = document.getElementById("empty-msg");
-
-        // 1. Lấy dữ liệu
         const orders = JSON.parse(localStorage.getItem("orders") || "[]");
 
-        // 2. Kiểm tra dữ liệu rỗng
         if (orders.length === 0) {
-          if (tbody) tbody.innerHTML = "";
-          if (emptyMsg) emptyMsg.classList.remove("d-none");
+          tbody.innerHTML = "";
+          emptyMsg.classList.remove("d-none");
           return;
         }
+        emptyMsg.classList.add("d-none");
 
-        // 3. Ẩn thông báo rỗng
-        if (emptyMsg) emptyMsg.classList.add("d-none");
+        tbody.innerHTML = orders
+          .map((order, index) => {
+            const statusClass =
+              STATUS_MAP[order.status] || "bg-light text-dark";
+            const totalMoney = order.total
+              ? parseInt(order.total).toLocaleString()
+              : "0";
 
-        // 4. Vẽ bảng
-        if (tbody) {
-          tbody.innerHTML = orders
-            .map((order, index) => {
-              const productSummary = order.items
-                ? order.items.map((i) => `${i.name} (x${i.qty})`).join(", ")
-                : "Lỗi SP";
-              const totalMoney = order.total
-                ? parseInt(order.total).toLocaleString()
-                : 0;
+            // --- TẠO HTML DANH SÁCH SẢN PHẨM NHỎ GỌN ---
+            let productListHtml = "";
+            if (order.items && order.items.length > 0) {
+              // Chỉ hiện tối đa 2 sản phẩm, nếu nhiều hơn thì hiện "+3 sản phẩm khác"
+              const displayItems = order.items.slice(0, 2);
 
-              return `
-                        <tr>
-                            <td class="fw-bold text-danger">${order.id}</td>
-                            <td>${order.date}</td>
-                            <td>
-                                <span class="fw-bold">${order.customer.name}</span><br>
-                                <small>${order.customer.phone}</small>
-                            </td>
-                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${productSummary}">
-                                ${productSummary}
-                            </td>
-                            <td class="fw-bold text-success">${totalMoney} đ</td>
-                            <td>
-                                <button class="btn btn-sm btn-info text-white me-1" onclick="viewDetail(${index})">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteOrder(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+              productListHtml = displayItems
+                .map((i) => {
+                  // Xử lý ảnh (nếu là base64 hoặc đường dẫn)
+                  let img = i.img;
+                  if (!img.startsWith("data:") && !img.startsWith("asset")) {
+                    // Nếu chỉ lưu tên file, ta thử tìm trong kho ảnh upload
+                    const stored = localStorage.getItem("img_" + i.img);
+                    if (stored) img = stored;
+                  }
+
+                  return `
+                            <div class="product-list-item">
+                                <img src="${img}" onerror="this.src='https://placehold.co/30?text=Img'">
+                                <div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.85rem; line-height:1.2;">${i.name}</div>
+                                    <div class="text-muted" style="font-size: 0.75rem;">x${i.qty}</div>
+                                </div>
+                            </div>
+                        `;
+                })
+                .join("");
+
+              if (order.items.length > 2) {
+                productListHtml += `<small class="text-primary fst-italic">+${
+                  order.items.length - 2
+                } sản phẩm khác...</small>`;
+              }
+            } else {
+              productListHtml =
+                '<span class="text-muted small">Không có sản phẩm</span>';
+            }
+
+            // --- NÚT HÀNH ĐỘNG ---
+            let actionButtons = "";
+            if (order.status === "Chờ xử lý") {
+              actionButtons = `
+                        <button class="btn btn-sm btn-success me-1" onclick="updateStatus(${index}, 'Đang giao')" title="Duyệt đơn"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-sm btn-danger" onclick="updateStatus(${index}, 'Đã hủy')" title="Hủy đơn"><i class="fas fa-times"></i></button>
                     `;
-            })
-            .join("");
-        }
+            } else if (order.status === "Đang giao") {
+              actionButtons = `
+                        <button class="btn btn-sm btn-primary" onclick="updateStatus(${index}, 'Hoàn tất')" title="Xác nhận đã giao"><i class="fas fa-check-double"></i> Xong</button>
+                    `;
+            } else {
+              actionButtons = `
+                        <button class="btn btn-sm btn-outline-secondary" onclick="deleteOrder(${index})" title="Xóa"><i class="fas fa-trash"></i></button>
+                    `;
+            }
+
+            return `
+                    <tr>
+                        <td><span class="fw-bold text-primary">${order.id.slice(
+                          -6
+                        )}</span></td>
+                        <td><small class="text-muted">${order.date}</small></td>
+                        <td>
+                            <div class="fw-bold" style="font-size: 0.9rem;">${
+                              order.customer.name
+                            }</div>
+                            <small class="text-muted" style="font-size: 0.8rem;">${
+                              order.customer.phone
+                            }</small>
+                        </td>
+                        
+                        <td>${productListHtml}</td>
+                        
+                        <td><span class="badge-status ${statusClass}">${
+              order.status
+            }</span></td>
+                        <td class="fw-bold text-danger">${totalMoney} đ</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-info text-white me-1" onclick="viewDetail(${index})" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                            ${actionButtons}
+                        </td>
+                    </tr>
+                `;
+          })
+          .join("");
+      }
+
+      function updateStatus(index, newStatus) {
+        let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+        orders[index].status = newStatus;
+        localStorage.setItem("orders", JSON.stringify(orders));
+        renderOrderTable();
       }
 
       function viewDetail(index) {
@@ -194,58 +266,53 @@
 
         const itemsHtml = order.items
           .map(
-            (item) => `
-                <div class="d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
+            (i) => `
+                <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
                     <div class="d-flex align-items-center">
                         <img src="${
-                          item.img
-                        }" width="50" class="me-2 rounded" style="object-fit:cover;">
+                          i.img
+                        }" width="40" class="rounded me-2" onerror="this.src='https://placehold.co/40'">
                         <div>
-                            <strong>${item.name}</strong><br>
-                            <small class="text-muted">${parseInt(
-                              item.price
-                            ).toLocaleString()} x ${item.qty}</small>
+                            <div class="fw-bold">${i.name}</div>
+                            <small class="text-muted">Giá: ${parseInt(
+                              i.price
+                            ).toLocaleString()}đ x ${i.qty}</small>
                         </div>
                     </div>
-                    <span class="fw-bold">${(
-                      item.price * item.qty
-                    ).toLocaleString()} đ</span>
+                    <span class="fw-bold text-danger">${(
+                      i.price * i.qty
+                    ).toLocaleString()}đ</span>
                 </div>
             `
           )
           .join("");
 
-        const detailHtml = `
-                <div class="mb-3">
-                    <p><strong>Mã:</strong> ${
-                      order.id
-                    } <span class="badge bg-warning text-dark">${
-          order.status
-        }</span></p>
-                    <p><strong>Khách:</strong> ${order.customer.name} - ${
-          order.customer.phone
-        }</p>
-                    <p><strong>Địa chỉ:</strong> ${order.customer.address}</p>
-                    <p><strong>Thanh toán:</strong> ${
-                      order.customer.payment || "COD"
-                    }</p>
+        document.getElementById("modal-body-detail").innerHTML = `
+                <div class="alert alert-info d-flex justify-content-between align-items-center">
+                    <strong>Trạng thái: ${order.status}</strong>
+                    <small>${order.date}</small>
                 </div>
-                <h6>Sản phẩm:</h6>
-                <div class="bg-light p-2 rounded mb-2">${itemsHtml}</div>
-                <h5 class="text-end text-danger">Tổng: ${parseInt(
-                  order.total
-                ).toLocaleString()} VNĐ</h5>
+                <p><strong>Khách hàng:</strong> ${order.customer.name} (${
+          order.customer.phone
+        })</p>
+                <p><strong>Địa chỉ:</strong> ${order.customer.address}</p>
+                <p><strong>Thanh toán:</strong> ${order.customer.payment}</p>
+                <div class="bg-light p-3 rounded mt-3">
+                    <h6 class="border-bottom pb-2 mb-3">Danh sách sản phẩm</h6>
+                    ${itemsHtml}
+                    <div class="d-flex justify-content-between mt-3 pt-2 border-top">
+                        <span class="fw-bold">Tổng cộng:</span>
+                        <span class="fw-bold text-danger fs-5">${parseInt(
+                          order.total
+                        ).toLocaleString()} VNĐ</span>
+                    </div>
+                </div>
             `;
-
-        const detailBody = document.getElementById("modal-body-detail");
-        if (detailBody) detailBody.innerHTML = detailHtml;
-
-        const modalEl = document.getElementById("detailModal");
-        if (modalEl) new bootstrap.Modal(modalEl).show();
+        new bootstrap.Modal(document.getElementById("detailModal")).show();
       }
 
       function deleteOrder(index) {
-        if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này?")) {
+        if (confirm("Bạn có chắc muốn xóa vĩnh viễn đơn hàng này?")) {
           let orders = JSON.parse(localStorage.getItem("orders") || "[]");
           orders.splice(index, 1);
           localStorage.setItem("orders", JSON.stringify(orders));
@@ -254,89 +321,16 @@
       }
 
       function clearAllOrders() {
-        if (confirm("Xóa tất cả đơn hàng?")) {
+        if (confirm("CẢNH BÁO: Xóa tất cả dữ liệu đơn hàng?")) {
           localStorage.removeItem("orders");
           renderOrderTable();
         }
       }
 
-      // --- KHỞI CHẠY ---
-      document.addEventListener("DOMContentLoaded", () => {
-        checkDebug(); // Kiểm tra xem có dữ liệu không
-        renderOrderTable(); // Vẽ bảng
-      });
-
-      window.addEventListener("storage", function (e) {
+      document.addEventListener("DOMContentLoaded", renderOrderTable);
+      window.addEventListener("storage", (e) => {
         if (e.key === "orders") renderOrderTable();
       });
-      function renderOrderTable() {
-        const tbody = document.getElementById("order-list");
-        const emptyMsg = document.getElementById("empty-msg");
-
-        // 1. Lấy dữ liệu
-        const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-
-        // 2. Kiểm tra dữ liệu rỗng
-        if (!orders || orders.length === 0) {
-          if (tbody) tbody.innerHTML = "";
-          if (emptyMsg) emptyMsg.classList.remove("d-none");
-          return;
-        }
-
-        // 3. Ẩn thông báo rỗng
-        if (emptyMsg) emptyMsg.classList.add("d-none");
-
-        // 4. Vẽ bảng (CODE AN TOÀN ĐÃ CẬP NHẬT)
-        if (tbody) {
-          tbody.innerHTML = orders
-            .map((order, index) => {
-              // Kiểm tra an toàn: Nếu order hoặc customer không tồn tại thì tạo dữ liệu giả
-              const cusName = order.customer?.name || "Khách (Lỗi data)";
-              const cusPhone = order.customer?.phone || "---";
-
-              // Kiểm tra an toàn: items
-              let productSummary = "Không có sản phẩm";
-              if (Array.isArray(order.items)) {
-                productSummary = order.items
-                  .map((i) => {
-                    // Chống lỗi nếu item bị null
-                    return `${i?.name || "SP Lỗi"} (x${i?.qty || 0})`;
-                  })
-                  .join(", ");
-              }
-
-              const totalMoney = order.total
-                ? parseInt(order.total).toLocaleString()
-                : "0";
-
-              return `
-                        <tr>
-                            <td class="fw-bold text-danger">${
-                              order.id || "N/A"
-                            }</td>
-                            <td>${order.date || "---"}</td>
-                            <td>
-                                <span class="fw-bold">${cusName}</span><br>
-                                <small>${cusPhone}</small>
-                            </td>
-                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${productSummary}">
-                                ${productSummary}
-                            </td>
-                            <td class="fw-bold text-success">${totalMoney} đ</td>
-                            <td>
-                                <button class="btn btn-sm btn-info text-white me-1" onclick="viewDetail(${index})">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteOrder(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-            })
-            .join("");
-        }
-      }
     </script>
   </body>
 </html>

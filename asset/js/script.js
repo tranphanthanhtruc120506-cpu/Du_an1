@@ -1,18 +1,23 @@
-// ======================= API & KHỞI TẠO =======================
-const productApi = "data/products.json";
+// ======================= 1. CẤU HÌNH DỮ LIỆU =======================
+const allDataFiles = [
+  "data/products.json",
+  "data/chude2.json",
+  "data/hoatuoi2.json",
+  "data/kieudang2.json",
+];
+
 let allProducts = [];
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-// Cập nhật số lượng giỏ hàng khi load trang
 document.getElementById("cart-count").innerText =
   cart.reduce((t, i) => t + i.qty, 0) || 0;
 
-// ======================= TÌM KIẾM =======================
+// ======================= TÌM KIẾM & TẢI DỮ LIỆU =======================
 document.getElementById("button-addon2")?.addEventListener("click", (e) => {
   e.preventDefault();
   const query = document.getElementById("search-inp").value.trim();
   localStorage.setItem("searchQuery", query);
-  loadProducts();
+  loadGlobalData();
 });
 
 document.getElementById("search-inp")?.addEventListener("keypress", (e) => {
@@ -22,212 +27,200 @@ document.getElementById("search-inp")?.addEventListener("keypress", (e) => {
   }
 });
 
-// ======================= LOAD DATA =======================
-function loadProducts() {
-  fetch(productApi)
-    .then((r) => r.json())
-    .then((data) => {
-      allProducts = (data.products || data).filter(
-        (p) => p.status === "Enabled"
-      );
+function loadGlobalData() {
+  const storedData = localStorage.getItem("products");
 
-      const query = (localStorage.getItem("searchQuery") || "")
-        .toLowerCase()
-        .trim();
-      localStorage.removeItem("searchQuery");
-
-      const container = document.getElementById("products-container");
-      if (!container) return;
-
-      container.innerHTML = "";
-
-      if (query) {
-        const result = allProducts.filter((p) => {
-          return (
-            p.name?.toLowerCase().includes(query) ||
-            p.topic?.toLowerCase().includes(query) ||
-            p.flower?.toLowerCase().includes(query) ||
-            p.style?.toLowerCase().includes(query)
-          );
+  if (storedData) {
+    allProducts = JSON.parse(storedData).filter((p) => p.status === "Enabled");
+    processDisplay();
+  } else {
+    Promise.all(allDataFiles.map((url) => fetch(url).then((res) => res.json())))
+      .then((results) => {
+        allProducts = [];
+        results.forEach((data) => {
+          if (Array.isArray(data)) allProducts = allProducts.concat(data);
+          else if (data.products)
+            allProducts = allProducts.concat(data.products);
         });
-        renderSearchResults(query, result);
-      } else {
-        renderCategories(); // Giữ nguyên giao diện chia danh mục
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      document
-        .getElementById("products-container")
-        ?.insertAdjacentHTML(
-          "beforeend",
-          `<h3 class="text-center text-danger">Lỗi tải dữ liệu sản phẩm!</h3>`
-        );
-    });
+        localStorage.setItem("products", JSON.stringify(allProducts));
+        processDisplay();
+      })
+      .catch((err) => console.error("Lỗi tải dữ liệu:", err));
+  }
 }
 
-// ======================= TRANG CHỦ (GIAO DIỆN CŨ) =======================
+function processDisplay() {
+  const query = (localStorage.getItem("searchQuery") || "")
+    .toLowerCase()
+    .trim();
+  localStorage.removeItem("searchQuery");
+
+  const container = document.getElementById("products-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (query) {
+    const result = allProducts.filter(
+      (p) =>
+        p.name?.toLowerCase().includes(query) ||
+        p.category?.toLowerCase().includes(query) ||
+        p.flower?.toLowerCase().includes(query)
+    );
+    renderSearchResults(query, result);
+  } else {
+    renderCategories();
+  }
+}
+
+// ======================= TRANG CHỦ: CHỈ HIỆN GIẢM GIÁ & SP MỚI =======================
 function renderCategories() {
   const container = document.getElementById("products-container");
 
-  // Phân nhóm sản phẩm như cũ
-  const groups = {
-    giamgia: allProducts.filter((p) => p.category === "giamgia"),
-    spmoi: allProducts.filter((p) => p.category === "spmoi"),
-  };
+  // 1. LỌC SẢN PHẨM GIẢM GIÁ
+  // (Chỉ lấy nếu danh mục là 'giamgia' HOẶC có % giảm giá > 0)
+  const saleProducts = allProducts.filter(
+    (p) => p.category === "giamgia" || (p.salePercent && p.salePercent > 0)
+  );
 
-  const titles = {
-    giamgia: "--- Đang giảm giá ---",
-    spmoi: "--- Sản Phẩm Mới ---",
-  };
+  // 2. LỌC SẢN PHẨM MỚI
+  // (Chỉ lấy nếu danh mục LÀ 'spmoi')
+  // Lưu ý: Tôi đã bỏ logic "tự động lấy sp mới nhất bù vào" để tránh hiện lung tung.
+  // Nếu bạn muốn sp hiện ở đây, bên Admin bạn phải chọn danh mục là "Sản phẩm mới"
+  const newProducts = allProducts.filter((p) => p.category === "spmoi");
 
-  Object.keys(groups).forEach((key, idx) => {
-    if (groups[key].length === 0) return;
-
+  // --- VẼ MỤC 1: ĐANG GIẢM GIÁ ---
+  if (saleProducts.length > 0) {
     container.insertAdjacentHTML(
       "beforeend",
       `
-      <div class="text-center my-5">
-        <h2 class="display-5 fw-bold" style="color:#8b0015;">${titles[key]}</h2>
-      </div>
-
-      <div class="row g-4 justify-content-center mb-5">
-        ${groups[key]
-          .slice(0, 4)
-          .map((item) => cardHTML(item))
-          .join("")}
-      </div>
-
-      ${
-        idx < Object.keys(groups).length - 1
-          ? '<hr class="my-5" style="border-top:3px solid #f8c6d5;">'
-          : ""
-      }
+        <div class="text-center my-5">
+            <h2 class="display-5 fw-bold" style="color:#8b0015;">--- ĐANG GIẢM GIÁ ---</h2>
+        </div>
+        <div class="row g-4 justify-content-center mb-5">
+            ${saleProducts
+              .slice(0, 8)
+              .map((item) => cardHTML(item))
+              .join("")}
+        </div>
+        <hr class="my-5" style="border-top:3px solid #f8c6d5;">
       `
     );
-  });
+  }
 
+  // --- VẼ MỤC 2: SẢN PHẨM MỚI ---
+  if (newProducts.length > 0) {
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
+        <div class="text-center my-5">
+            <h2 class="display-5 fw-bold" style="color:#8b0015;">--- SẢN PHẨM MỚI ---</h2>
+        </div>
+        <div class="row g-4 justify-content-center mb-5">
+            ${newProducts
+              .slice(0, 8)
+              .map((item) => cardHTML(item))
+              .join("")}
+        </div>
+      `
+    );
+  }
+
+  // ĐÃ XÓA PHẦN TỰ ĐỘNG HIỆN CÁC DANH MỤC KHÁC
   attachEvents();
 }
 
-// Giao diện thẻ Card cũ của bạn
+// ======================= CÁC HÀM CHUNG =======================
 function cardHTML(item) {
+  let imgSrc = item.img;
+  const storedImg = localStorage.getItem("img_" + item.img);
+  if (storedImg) imgSrc = storedImg;
+
   return `
     <div class="col-6 col-md-4 col-lg-3">
       <div class="card h-100 position-relative border-0 shadow-sm overflow-hidden rounded-3">
-
         ${
           item.salePercent > 0
-            ? `<div class="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2 fw-bold"
-                style="border-radius:50px;z-index:10;">-${item.salePercent}%</div>`
+            ? `<div class="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2 fw-bold" style="border-radius:50px;z-index:10;">-${item.salePercent}%</div>`
             : ""
         }
-
         <a href="sanphamchitiet.html?id=${item.id}">
-          <img src="${item.img}" 
-               class="card-img-top"
-               style="height:320px;object-fit:cover;cursor:pointer;"
-               onerror="this.src='asset/notfound.jpg'"
-               alt="${item.name}">
+          <img src="${imgSrc}" class="card-img-top" style="height:320px;object-fit:cover;cursor:pointer;" onerror="this.src='asset/notfound.jpg'">
         </a>
-
         <div class="card-body text-center d-flex flex-column">
-
           <a href="sanphamchitiet.html?id=${
             item.id
           }" class="text-decoration-none">
-            <h5 class="card-title mb-2" style="color:#5D001E;cursor:pointer;">
-              ${item.name}
-            </h5>
+            <h5 class="card-title mb-2" style="color:#5D001E;cursor:pointer;">${
+              item.name
+            }</h5>
           </a>
-
           <p class="text-danger fw-bold fs-5 mb-1">
-            ${item.priceNew.toLocaleString()} VNĐ
+            ${parseInt(item.priceNew || item.price).toLocaleString()} VNĐ
             ${
-              item.priceOld > item.priceNew
-                ? `<s class="text-muted fs-6">${item.priceOld.toLocaleString()} VNĐ</s>`
+              item.priceOld && item.priceOld > (item.priceNew || item.price)
+                ? `<s class="text-muted fs-6">${parseInt(
+                    item.priceOld
+                  ).toLocaleString()} VNĐ</s>`
                 : ""
             }
           </p>
-
           <button class="btn btn-danger mt-auto mb-2 btn-buy" data-id="${
             item.id
-          }">
-            Đặt hàng
-          </button>
-          <button class="btn btn-warning btn-add-cart" data-id="${item.id}">
-            Thêm vào giỏ
-          </button>
+          }">Đặt hàng</button>
+          <button class="btn btn-warning btn-add-cart" data-id="${
+            item.id
+          }">Thêm vào giỏ</button>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-// ======================= KẾT QUẢ TÌM KIẾM =======================
 function renderSearchResults(query, products) {
   const container = document.getElementById("products-container");
-
-  container.innerHTML = `
-    <div class="text-center my-5">
-      <h2 class="display-5 fw-bold" style="color:#8b0015;">
-        Kết quả tìm kiếm: "${query}"
-      </h2>
-      <p class="text-muted">Tìm thấy <strong>${products.length}</strong> sản phẩm</p>
-    </div>
-  `;
-
+  container.innerHTML = `<div class="text-center my-5"><h2 class="display-5 fw-bold" style="color:#8b0015;">Kết quả: "${query}"</h2><p class="text-muted">Tìm thấy <strong>${products.length}</strong> sản phẩm</p></div>`;
   if (products.length === 0) {
     container.insertAdjacentHTML(
       "beforeend",
-      `<h4 class="text-center text-danger">Không tìm thấy sản phẩm nào phù hợp!</h4>`
+      `<h4 class="text-center text-danger">Không tìm thấy!</h4>`
     );
     return;
   }
-
-  const rowHTML = `
-    <div class="row g-4 justify-content-center mb-5">
-      ${products.map((item) => cardHTML(item)).join("")}
-    </div>
-  `;
-
-  container.insertAdjacentHTML("beforeend", rowHTML);
+  container.insertAdjacentHTML(
+    "beforeend",
+    `<div class="row g-4 justify-content-center mb-5">${products
+      .map((item) => cardHTML(item))
+      .join("")}</div>`
+  );
   attachEvents();
 }
 
-// ======================= EVENTS =======================
 function attachEvents() {
   document.querySelectorAll(".btn-buy, .btn-add-cart").forEach((btn) => {
     btn.onclick = (e) => {
       e.preventDefault();
       const id = parseInt(btn.dataset.id);
-      const product = allProducts.find((p) => p.id === id);
+      const product = allProducts.find((p) => p.id == id);
       if (product) addToCart(product, btn.classList.contains("btn-buy"));
     };
   });
 }
 
-// ======================= GIỎ HÀNG =======================
 function addToCart(product, openModal = false) {
   const exist = cart.find((i) => i.name === product.name);
-
   if (exist) exist.qty++;
   else
     cart.push({
       name: product.name,
       img: product.img,
-      price: product.priceNew,
+      price: parseInt(product.priceNew || product.price),
       qty: 1,
     });
-
   localStorage.setItem("cart", JSON.stringify(cart));
   document.getElementById("cart-count").innerText = cart.reduce(
     (t, i) => t + i.qty,
     0
   );
-
   updateCartUI();
-
   if (!openModal)
     new bootstrap.Toast(document.getElementById("toastAddCart")).show();
   else new bootstrap.Modal(document.getElementById("cartModal")).show();
@@ -238,30 +231,24 @@ function updateCartUI() {
   if (!tbody) return;
   tbody.innerHTML = "";
   let total = 0;
-
   cart.forEach((item, i) => {
+    let imgSrc = item.img;
+    const storedImg = localStorage.getItem("img_" + item.img);
+    if (storedImg) imgSrc = storedImg;
     total += item.price * item.qty;
-
     tbody.innerHTML += `
       <tr>
-        <td><img src="${item.img}" width="50" class="rounded"></td>
+        <td><img src="${imgSrc}" width="50" class="rounded" onerror="this.src='asset/notfound.jpg'"></td>
         <td class="align-middle">${item.name}</td>
         <td class="align-middle">${item.price.toLocaleString()} VNĐ</td>
-        <td class="align-middle">
-          <input type="number" min="1" value="${item.qty}"
-            class="form-control form-control-sm qty"
-            data-index="${i}" style="width:70px;">
-        </td>
-        <td class="align-middle">
-          <button class="btn btn-danger btn-sm" onclick="removeFromCart(${i})">Xóa</button>
-        </td>
-      </tr>
-    `;
+        <td class="align-middle"><input type="number" min="1" value="${
+          item.qty
+        }" class="form-control form-control-sm qty" data-index="${i}" style="width:70px;"></td>
+        <td class="align-middle"><button class="btn btn-danger btn-sm" onclick="removeFromCart(${i})">Xóa</button></td>
+      </tr>`;
   });
-
   document.getElementById("cart-total").innerText =
     total.toLocaleString() + " VNĐ";
-
   document.querySelectorAll(".qty").forEach((input) => {
     input.onchange = () => {
       let qty = parseInt(input.value) || 1;
@@ -283,7 +270,6 @@ function removeFromCart(i) {
   updateCartUI();
 }
 
-// ============================== CHECKOUT ====================================
 document.getElementById("checkoutBtn")?.addEventListener("click", () => {
   updateCartUI();
   new bootstrap.Modal(document.getElementById("checkoutModal")).show();
@@ -294,13 +280,11 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
   const phone = document.getElementById("cusPhone").value.trim();
   const address = document.getElementById("cusAddress").value.trim();
   const payment = document.getElementById("paymentMethod").value;
-
   if (!name || !phone || !address) {
-    alert("Vui lòng nhập đầy đủ thông tin nhận hàng!");
+    alert("Vui lòng nhập đủ thông tin!");
     return;
   }
 
-  // 1. TẠO ĐƠN HÀNG
   const newOrder = {
     id: "DH" + Date.now(),
     customer: { name, phone, address, payment },
@@ -309,34 +293,20 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
     date: new Date().toLocaleString(),
     status: "Chờ xử lý",
   };
-
-  // 2. LƯU VÀO LOCALSTORAGE "orders"
   let orders = JSON.parse(localStorage.getItem("orders") || "[]");
   orders.unshift(newOrder);
   localStorage.setItem("orders", JSON.stringify(orders));
 
-  // 3. XÓA GIỎ HÀNG & RESET
   cart = [];
   localStorage.removeItem("cart");
   document.getElementById("cart-count").innerText = "0";
   updateCartUI();
-
-  // 4. ĐÓNG CÁC MODAL
-  const checkoutModalEl = document.getElementById("checkoutModal");
-  const checkoutModal = bootstrap.Modal.getInstance(checkoutModalEl);
-  if (checkoutModal) checkoutModal.hide();
-
+  bootstrap.Modal.getInstance(document.getElementById("checkoutModal")).hide();
   const cartModalEl = document.getElementById("cartModal");
-  let cartModal = bootstrap.Modal.getInstance(cartModalEl);
-  if (!cartModal && cartModalEl) {
-    cartModal = new bootstrap.Modal(cartModalEl);
-  }
-  if (cartModal) cartModal.hide();
-
-  // 5. HIỆN THÔNG BÁO & TỰ ẨN
+  const cartInstance = bootstrap.Modal.getInstance(cartModalEl);
+  if (cartInstance) cartInstance.hide();
   const doneModal = new bootstrap.Modal(document.getElementById("doneModal"));
   doneModal.show();
-
   setTimeout(() => {
     doneModal.hide();
     document.getElementById("cusName").value = "";
@@ -345,5 +315,4 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
   }, 2000);
 });
 
-// Chạy load data
-loadProducts();
+loadGlobalData();

@@ -6,7 +6,7 @@
       "category": "bohoa",
       "topic": "Kiểu dáng",
       "style": "bó hoa",
-      "flower": "hoa hồng",
+      "flower": "hoa hồng pastel",
       "img": "asset/hinhanh/kieudang/bohoa/sp1.jpg",
       "priceNew": 560000,
       "status": "Enabled"
@@ -17,7 +17,7 @@
       "category": "bohoa",
       "topic": "Kiểu dáng",
       "style": "bó hoa",
-      "flower": "hoa hồng",
+      "flower": "hoa hồng pastel",
       "img": "asset/hinhanh/kieudang/bohoa/sp2.jpg",
       "priceNew": 470000,
       "status": "Enabled"
@@ -28,7 +28,7 @@
       "category": "bohoa",
       "topic": "Kiểu dáng",
       "style": "bó hoa",
-      "flower": "hoa hồng",
+      "flower": "hoa hồng pastel",
       "img": "asset/hinhanh/kieudang/bohoa/sp3.jpg",
       "priceNew": 590000,
       "status": "Enabled"
@@ -50,7 +50,7 @@
       "category": "giohoa",
       "topic":"Kiểu dáng",
       "style": "giohoa",
-      "flower": "hoa hồng",
+      "flower": "giỏ hoa",
       "img": "asset/hinhanh/kieudang/giohoa/sp1.jpg",
       "priceNew": 579000,
       "status": "Enabled"
@@ -73,7 +73,7 @@
       "topic": "Kiểu dáng",
       "style": "giohoa",
       "flower": "hoa hồng",
-      "img": "asset/hinhanh/kieudang/giohoa/sp1.jpg",
+      "img": "asset/hinhanh/kieudang/giohoa/sp3.jpg",
       "priceNew": 565000,
       "status": "Enabled"
     },
@@ -83,7 +83,7 @@
       "category": "giohoa",
       "topic": "Kiểu dáng",
       "style": "giohoa",
-      "flower": "hoa hồng",
+      "flower": "hoa nhiều màu",
       "img": "asset/hinhanh/kieudang/giohoa/sp4.jpg",
       "priceNew": 770000,
       "status": "Enabled"
