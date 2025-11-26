@@ -13,6 +13,7 @@ let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
 // Cập nhật icon giỏ hàng ngay khi vào trang
 updateCartCount();
+updateCartModalUI(); // đảm bảo modal hiển thị nếu người dùng mở luôn
 
 // 2. Load Dữ Liệu
 async function loadProduct() {
@@ -46,6 +47,7 @@ async function loadProduct() {
         renderThumbnails(currentProduct);
         renderRelatedProducts(currentProduct);
         loadReviews();
+        bindProductButtons(); // GẮN SỰ KIỆN CHO NÚT SAU KHI RENDER
     } else {
         console.error("Vẫn không tìm thấy sản phẩm ID:", id);
         const nameEl = document.getElementById("product-name");
@@ -71,13 +73,16 @@ async function fetchAndSaveData() {
 // 3. Hiển thị Thông tin
 function renderProductInfo(product) {
     document.title = product.name + " - Spark Flower";
-    document.getElementById("product-name").innerText = product.name;
+    const nameEl = document.getElementById("product-name");
+    if(nameEl) nameEl.innerText = product.name;
+
     const idEl = document.getElementById("product-id") || document.getElementById("p-id");
-    if(idEl) idEl.innerText = product.id;
-    
-    const priceNew = parseInt(product.priceNew || product.price || 0);
-    const priceOld = parseInt(product.priceOld || 0);
-    document.getElementById("product-price-new").innerText = priceNew.toLocaleString() + " VNĐ";
+    if(idEl) idEl.innerText = product.id || "";
+
+    const priceNew = parseInt(product.priceNew || product.price || 0) || 0;
+    const priceOld = parseInt(product.priceOld || 0) || 0;
+    const priceNewEl = document.getElementById("product-price-new");
+    if (priceNewEl) priceNewEl.innerText = priceNew.toLocaleString() + " VNĐ";
     
     const oldPriceEl = document.getElementById("product-price-old");
     if (oldPriceEl) {
@@ -85,19 +90,23 @@ function renderProductInfo(product) {
             oldPriceEl.innerText = priceOld.toLocaleString() + " VNĐ";
             oldPriceEl.parentElement.style.display = "block";
         } else {
+            // ẩn nếu không có giá cũ
             oldPriceEl.parentElement.style.display = "none";
         }
     }
 
-    let imgSrc = product.img;
-    if (!imgSrc.startsWith('data:')) {
-         const storedImg = localStorage.getItem("img_" + product.img);
-         if (storedImg) imgSrc = storedImg;
-    }
+    // Xử lý img: nếu có ảnh lưu trong localStorage dùng ảnh đó, ngược lại dùng product.img
+    let imgSrc = product.img || '';
+    try {
+        if (imgSrc && !imgSrc.startsWith('data:') && !imgSrc.startsWith('http')) {
+            const storedImg = localStorage.getItem("img_" + product.img);
+            if (storedImg) imgSrc = storedImg;
+        }
+    } catch (e) { /* ignore */ }
     
     const imgEl = document.getElementById("product-img");
     if(imgEl) {
-        imgEl.src = imgSrc;
+        if (imgSrc) imgEl.src = imgSrc;
         imgEl.onerror = function() { this.src = 'asset/hinhanh/logo2 (2).png'; };
     }
 
@@ -120,18 +129,27 @@ window.addCurrentToCart = function() {
     if (!currentProduct) { alert("Đang tải dữ liệu..."); return; }
     
     const qtyInput = document.getElementById("qty");
-    const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+    let qty = 1;
+    if (qtyInput) {
+        qty = parseInt(qtyInput.value) || 1;
+        if (qty < 1) qty = 1;
+    }
     
     cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    const exist = cart.find(i => i.name === currentProduct.name);
+    // Lấy ảnh hiện đang hiển thị (đã xử lý src)
+    let imgToStore = document.getElementById("product-img")?.src || currentProduct.img || '';
+
+    // nếu đã có sản phẩm (so sánh id ưu tiên hơn name)
+    const exist = cart.find(i => i.id == currentProduct.id || i.name === currentProduct.name);
     if (exist) {
-        exist.qty += qty;
+        exist.qty = (parseInt(exist.qty) || 0) + qty;
     } else {
         cart.push({
+            id: currentProduct.id,
             name: currentProduct.name,
-            img: currentProduct.img,
-            price: parseInt(currentProduct.priceNew || currentProduct.price || 0),
+            img: imgToStore,
+            price: parseInt(currentProduct.priceNew || currentProduct.price || 0) || 0,
             qty: qty
         });
     }
@@ -152,12 +170,15 @@ window.addCurrentToCart = function() {
 }
 
 window.buyNow = function() {
+    // Thêm vào giỏ trước
     window.addCurrentToCart();
+    // Mở modal giỏ hàng
     const modalEl = document.getElementById('cartModal');
     if (modalEl && typeof bootstrap !== 'undefined') {
         const modal = new bootstrap.Modal(modalEl);
         modal.show();
     } else {
+        // Nếu không có bootstrap, điều hướng tới trang giỏ hàng hoặc thông báo
         alert("Đã thêm vào giỏ! Vui lòng kiểm tra giỏ hàng.");
     }
 }
@@ -165,7 +186,8 @@ window.buyNow = function() {
 window.changeQty = function(amount) {
     const input = document.getElementById("qty");
     if(input) {
-        let val = parseInt(input.value) + amount;
+        let val = parseInt(input.value) || 1;
+        val = val + amount;
         if (val < 1) val = 1;
         input.value = val;
     }
@@ -175,7 +197,7 @@ function updateCartCount() {
     const el = document.getElementById("cart-count");
     if(el) {
         const c = JSON.parse(localStorage.getItem("cart") || "[]");
-        el.innerText = c.reduce((t, i) => t + i.qty, 0);
+        el.innerText = c.reduce((t, i) => t + (parseInt(i.qty) || 0), 0);
     }
 }
 
@@ -192,18 +214,18 @@ function updateCartModalUI() {
         tbody.innerHTML = "<tr><td colspan='5' class='text-center'>Giỏ hàng trống</td></tr>";
     } else {
         currentCart.forEach((item, i) => {
-            let imgSrc = item.img;
-            if (!imgSrc.startsWith('data:') && !imgSrc.startsWith('http')) {
+            let imgSrc = item.img || '';
+            if (!imgSrc.startsWith('data:') && imgSrc && !imgSrc.startsWith('http')) {
                  const sImg = localStorage.getItem("img_" + item.img);
                  if(sImg) imgSrc = sImg;
             }
-            total += item.price * item.qty;
+            total += (parseInt(item.price) || 0) * (parseInt(item.qty) || 0);
             tbody.innerHTML += `
                 <tr>
                     <td><img src="${imgSrc}" width="40" style="border-radius:4px" onerror="this.src='asset/hinhanh/logo2 (2).png'"></td>
                     <td>${item.name}</td>
-                    <td>${item.price.toLocaleString()}</td>
-                    <td>${item.qty}</td>
+                    <td>${(parseInt(item.price)||0).toLocaleString()}</td>
+                    <td>${parseInt(item.qty)||0}</td>
                     <td><button class="btn btn-sm btn-danger" onclick="removeItemFromCart(${i})"><i class="fas fa-trash"></i></button></td>
                 </tr>
             `;
@@ -242,7 +264,7 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
         id: "DH" + Date.now(),
         customer: { name, phone, address, payment },
         items: c,
-        total: c.reduce((t, i) => t + i.price * i.qty, 0),
+        total: c.reduce((t, i) => t + (parseInt(i.price)||0) * (parseInt(i.qty)||0), 0),
         date: new Date().toLocaleString(),
         status: "Chờ xử lý"
     };
@@ -316,32 +338,30 @@ function renderRelatedProducts(product) {
 
 function loadReviews() {}
 
+// ------------ NEW: Gắn sự kiện cho nút Thêm & Mua --------------
+function findButtonByText(text) {
+    const buttons = Array.from(document.querySelectorAll("button"));
+    return buttons.find(b => b.textContent && b.textContent.replace(/\s+/g,' ').toLowerCase().includes(text.toLowerCase()));
+}
+
+function bindProductButtons() {
+    // tìm nút Mua Ngay (nội dung chứa "Mua Ngay")
+    const buyBtn = findButtonByText("Mua Ngay") || document.querySelector(".btn-danger");
+    if (buyBtn) {
+        // tránh gán nhiều lần
+        buyBtn.removeEventListener?.("click", buyNow);
+        buyBtn.addEventListener("click", buyNow);
+    }
+
+    // tìm nút Thêm vào giỏ (nội dung chứa "Thêm vào giỏ")
+    const addBtn = findButtonByText("Thêm vào giỏ") || document.querySelector(".btn-warning");
+    if (addBtn) {
+        addBtn.removeEventListener?.("click", addCurrentToCart);
+        addBtn.addEventListener("click", addCurrentToCart);
+    }
+}
+
+// Gọi loadProduct sau DOM ready
 document.addEventListener("DOMContentLoaded", loadProduct);
 
-// // Nội dung mô tả (Giữ nguyên phần thông tin chi tiết)
-//     const descElement = document.getElementById("product-desc");
-//     descElement.style.maxHeight = "400px";
-//     descElement.style.overflowY = "auto";
-//     descElement.style.paddingRight = "10px";
-//     let descriptionContent = product.description;
-//     if (!descriptionContent) {
-//         descriptionContent = `
-//             <div class="product-detail-content">
-//                 <p class="lead text-muted mb-3 text-justify" style="font-size: 0.95rem;">
-//                     <strong>${product.name}</strong> là sự lựa chọn hoàn hảo để gửi gắm yêu thương. Sản phẩm được thiết kế tỉ mỉ từ những bông hoa tươi nhất, mang lại vẻ đẹp sang trọng và tinh tế.
-//                 </p>
-//                 <h6 class="fw-bold text-dark mb-2"><i class="fas fa-star text-warning me-2"></i>Điểm nổi bật:</h6>
-//                 <ul class="text-muted small mb-3" style="list-style-type: disc; padding-left: 20px;">
-//                     <li class="mb-1">Hoa tươi nhập khẩu, độ bền cao.</li>
-//                     <li class="mb-1">Phong cách thiết kế hiện đại, phù hợp nhiều dịp.</li>
-//                     <li class="mb-1">Giấy gói cao cấp, màu sắc hài hòa.</li>
-//                 </ul>
-//                 <h6 class="fw-bold text-dark mb-2"><i class="fas fa-heart text-danger me-2"></i>Ý nghĩa:</h6>
-//                 <p class="text-muted small text-justify mb-0">
-//                     Mỗi bông hoa đều mang một thông điệp riêng. Sản phẩm này không chỉ là món quà vật chất mà còn là lời chúc tốt đẹp, sự quan tâm chân thành gửi đến người nhận. Phù hợp tặng sinh nhật, kỷ niệm, khai trương hoặc các ngày lễ đặc biệt.
-//                 </p>
-//             </div>
-//         `;
-//     }
-//     descElement.innerHTML = descriptionContent;
-// }
+        
