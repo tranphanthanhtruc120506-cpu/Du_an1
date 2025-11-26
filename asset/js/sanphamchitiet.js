@@ -46,11 +46,16 @@ async function loadProduct() {
         renderProductInfo(currentProduct);
         renderThumbnails(currentProduct);
         renderRelatedProducts(currentProduct);
+<<<<<<< HEAD
         loadReviews(); // Tải đánh giá
         bindProductButtons(); // GẮN SỰ KIỆN CHO NÚT SAU KHI RENDER
         bindReviewEvents(); // GẮN SỰ KIỆN GỬI ĐÁNH GIÁ
 
         renderGallery();
+=======
+        loadReviews();
+        bindProductButtons(); // GẮN SỰ KIỆN CHO NÚT SAU KHI RENDER
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
     } else {
         console.error("Vẫn không tìm thấy sản phẩm ID:", id);
         const nameEl = document.getElementById("product-name");
@@ -157,6 +162,7 @@ function renderProductInfo(product) {
 }
 
 // 4. Xử lý Giỏ Hàng
+<<<<<<< HEAD
 
 // === [PHẦN SỬA 1: TÁCH LOGIC THÊM GIỎ HÀNG] ===
 // Hàm này chỉ làm nhiệm vụ thêm data vào localStorage, không hiện thông báo
@@ -164,6 +170,21 @@ function addToCartInternal(qty) {
     if (!currentProduct) return false;
 
     cart = JSON.parse(localStorage.getItem("cart") || "[]");
+=======
+window.addCurrentToCart = function() {
+    console.log("Đang thêm vào giỏ...");
+    if (!currentProduct) { alert("Đang tải dữ liệu..."); return; }
+    
+    const qtyInput = document.getElementById("qty");
+    let qty = 1;
+    if (qtyInput) {
+        qty = parseInt(qtyInput.value) || 1;
+        if (qty < 1) qty = 1;
+    }
+    
+    cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
     // Lấy ảnh hiện đang hiển thị (đã xử lý src)
     let imgToStore = document.getElementById("product-img")?.src || currentProduct.img || '';
 
@@ -217,6 +238,7 @@ window.addCurrentToCart = function() {
 
 // Hàm này dùng cho nút "Mua ngay" (KHÔNG hiện toast, mở modal)
 window.buyNow = function() {
+<<<<<<< HEAD
     console.log("Nút Mua Ngay được nhấn");
     if (!currentProduct) { alert("Đang tải dữ liệu..."); return; }
 
@@ -231,14 +253,23 @@ window.buyNow = function() {
     addToCartInternal(qty);
 
     // 2. Mở modal giỏ hàng (hoặc checkout nếu muốn)
+=======
+    // Thêm vào giỏ trước
+    window.addCurrentToCart();
+    // Mở modal giỏ hàng
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
     const modalEl = document.getElementById('cartModal');
     if (modalEl && typeof bootstrap !== 'undefined') {
         const modal = new bootstrap.Modal(modalEl);
         modal.show();
     } else {
         // Nếu không có bootstrap, điều hướng tới trang giỏ hàng hoặc thông báo
+<<<<<<< HEAD
         // alert("Đã thêm vào giỏ! Vui lòng kiểm tra giỏ hàng.");
         // window.location.href = "giohang.html"; // Ví dụ
+=======
+        alert("Đã thêm vào giỏ! Vui lòng kiểm tra giỏ hàng.");
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
     }
 }
 // === [KẾT THÚC PHẦN SỬA 1] ===
@@ -277,8 +308,13 @@ function updateCartModalUI() {
         currentCart.forEach((item, i) => {
             let imgSrc = item.img || '';
             if (!imgSrc.startsWith('data:') && imgSrc && !imgSrc.startsWith('http')) {
+<<<<<<< HEAD
                   const sImg = localStorage.getItem("img_" + item.img);
                   if(sImg) imgSrc = sImg;
+=======
+                 const sImg = localStorage.getItem("img_" + item.img);
+                 if(sImg) imgSrc = sImg;
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
             }
             total += (parseInt(item.price) || 0) * (parseInt(item.qty) || 0);
             tbody.innerHTML += `
@@ -421,6 +457,7 @@ function renderRelatedProducts(product) {
 
 // === [PHẦN SỬA 2: XỬ LÝ ĐÁNH GIÁ] ===
 
+<<<<<<< HEAD
 // Hàm tải và hiển thị đánh giá (Thay thế hàm rỗng cũ)
 function loadReviews() {
     if (!currentProduct) return;
@@ -533,6 +570,8 @@ function bindReviewEvents() {
 // === [KẾT THÚC PHẦN SỬA 2] ===
 
 
+=======
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
 // ------------ NEW: Gắn sự kiện cho nút Thêm & Mua --------------
 function findButtonByText(text) {
     const buttons = Array.from(document.querySelectorAll("button"));
@@ -556,6 +595,7 @@ function bindProductButtons() {
     }
 }
 
+<<<<<<< HEAD
 // Hàm tạo đánh giá giả định (chỉ dùng để test)
 function seedFakeReviews() {
     const params = new URLSearchParams(window.location.search);
@@ -769,3 +809,9 @@ function renderGallery() {
 
 // Gọi loadProduct sau DOM ready
 document.addEventListener("DOMContentLoaded", loadProduct);
+=======
+// Gọi loadProduct sau DOM ready
+document.addEventListener("DOMContentLoaded", loadProduct);
+
+        
+>>>>>>> 84ead044183ae66792672cc8e5bca3ff0ca93b5b
