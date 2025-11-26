@@ -1,57 +1,57 @@
 /* asset/css/product-detail.css */
 
 body {
-    background-color: #fff;
-    font-family: Arial, sans-serif;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
 }
 
 .product-title {
-    color: #333;
-    font-family: Arial, sans-serif;
+  color: #333;
+  font-family: Arial, sans-serif;
 }
 
 .product-price .current-price {
-    color: #d3213f;
+  color: #d3213f;
 }
 
 .btn-buy-now {
-    background-color: #ff0000; /* Màu đỏ tươi như hình */
-    border: none;
+  background-color: #ff0000; /* Màu đỏ tươi như hình */
+  border: none;
 }
 
 .btn-buy-now:hover {
-    background-color: #cc0000;
+  background-color: #cc0000;
 }
 
 .btn-warning {
-    background-color: #ffc107;
-    border: none;
+  background-color: #ffc107;
+  border: none;
 }
 
 .policy-box {
-    background-color: #fff;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .policy-box .fa-camera,
 .policy-box .fa-gift,
 .policy-box .fa-flag,
 .policy-box .fa-shipping-fast {
-    width: 24px;
-    text-align: center;
+  width: 24px;
+  text-align: center;
 }
 
 .rating-section .progress-bar {
-    background-color: #ffc107; /* Màu vàng sao */
+  background-color: #ffc107; /* Màu vàng sao */
 }
 
 .rating-section .text-warning {
-    color: #ffc107 !important;
+  color: #ffc107 !important;
 }
 
 /* Responsive adjustments if needed */
 @media (max-width: 768px) {
-    .product-image-container {
-        margin-bottom: 20px;
-    }
+  .product-image-container {
+    margin-bottom: 20px;
+  }
 }

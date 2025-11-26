@@ -147,7 +147,9 @@ function cardHTML(item) {
           <img src="${imgSrc}" class="card-img-top" style="height:320px;object-fit:cover;cursor:pointer;" onerror="this.src='asset/notfound.jpg'">
         </a>
         <div class="card-body text-center d-flex flex-column">
-          <a a href="sanphamchitiet.html?id=${item.id}" class="text-decoration-none">
+          <a a href="sanphamchitiet.html?id=${
+            item.id
+          }" class="text-decoration-none">
             <h5 class="card-title mb-2" style="color:#5D001E;cursor:pointer;">${
               item.name
             }</h5>
@@ -314,4 +316,3 @@ document.getElementById("confirmOrderBtn")?.addEventListener("click", () => {
 });
 
 loadGlobalData();
-
