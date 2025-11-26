@@ -10,7 +10,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
     <link href="asset/css/style.css" rel="stylesheet" />
     <link href="asset/css/sanphamchitiet.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -102,6 +101,7 @@
             </div>
         </header>
 
+        <!-- MAIN CONTENT -->
         <!-- MAIN CONTENT -->
     <div class="container mt-4 mb-5">
         
@@ -200,9 +200,12 @@
 
         <!-- Related Products Placeholder (Optional) -->
         <div class="mb-5">
-            <h5 class="fw-bold text-uppercase mb-3"><i class="fas fa-th me-2"></i>Sản phẩm liên quan</h5>
-            <!-- Add related products grid here if needed -->
-        </div>
+    <h5 class="fw-bold text-uppercase mb-3"><i class="fas fa-th me-2"></i>Sản phẩm liên quan</h5>
+    
+    <div id="related-products" class="row g-3">
+        <p class="text-center">Đang tải sản phẩm...</p>
+    </div>
+</div>
 
         <!-- Review Section -->
         <div class="review-section">
@@ -265,22 +268,6 @@
             <div id="review-list">
                 <!-- Reviews will be loaded here -->
                 <div class="review-item card mb-3 border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-2">
-                            <h6 class="fw-bold mb-0">Pinky <span class="text-warning ms-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></h6>
-                            <small class="text-muted">25/11/2025</small>
-                        </div>
-                        <p class="text-secondary mb-0" style="font-size: 0.9rem;">Bó hoa này xinh tươi đúng như tên gọi, màu hồng phấn nhẹ nhàng quá hợp với tôi. Gói cẩn thận, hoa không bị dập. Sẽ mua thêm!</p>
-                    </div>
-                </div>
-                 <div class="review-item card mb-3 border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-2">
-                            <h6 class="fw-bold mb-0">Thần May Mắn <span class="text-warning ms-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></h6>
-                            <small class="text-muted">19/11/2025</small>
-                        </div>
-                        <p class="text-secondary mb-0" style="font-size: 0.9rem;">Đặt bó này để tặng bạn, vừa nhận được thì bạn tôi trúng số. Đúng là bó hoa mang lại may mắn! Chất lượng hoa thì khỏi bàn, tươi rói.</p>
-                    </div>
                 </div>
             </div>
 
@@ -307,7 +294,9 @@
                     <div class="mb-3">
                         <textarea class="form-control" id="review-text" rows="3" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-danger">Gửi đánh giá</button>
+                    <button type="button" id="btn-submit-review" class="btn btn-primary">
+                Gửi đánh giá
+            </button>
                 </form>
             </div>
 
@@ -504,6 +493,7 @@
     </div>
     
     <!-- SCRIPTS -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
      <script src="asset/js/sanphamchitiet.js"></script>
 </body>
 </html>
