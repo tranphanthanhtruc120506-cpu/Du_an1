@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 101,
     "name": "Nồng nàn tình yêu",
     "category": "giamgia",
     "topic": "giảm giá",
@@ -13,7 +13,7 @@
     "status": "Enabled"
   },
   {
-    "id": 2,
+    "id": 102,
     "name": "Hoa hướng dương rực rỡ",
     "category": "giamgia",
     "topic": "giảm giá",
@@ -26,7 +26,7 @@
     "status": "Enabled"
   },
   {
-    "id": 3,
+    "id": 103,
     "name": "Sắc hoa dịu dàng",
     "category": "giamgia",
     "topic": "giảm giá",
@@ -39,7 +39,7 @@
     "status": "Enabled"
   },
   {
-    "id": 4,
+    "id": 104,
     "name": "Hoa pastel sang trọng",
     "category": "giamgia",
     "topic": "giảm giá",
@@ -53,7 +53,7 @@
   },
 
   {
-    "id": 5,
+    "id": 105,
     "name": "Yêu thương ngọt ngào",
     "category": "spmoi",
     "topic": "sản phẩm mới",
@@ -64,7 +64,7 @@
     "status": "Enabled"
   },
   {
-    "id": 6,
+    "id": 106,
     "name": "Thanh khiết nhẹ nhàng",
     "category": "spmoi",
     "topic": "sản phẩm mới",
@@ -75,7 +75,7 @@
     "status": "Enabled"
   },
   {
-    "id": 7,
+    "id": 107,
     "name": "Sức sống rực rỡ",
     "category": "spmoi",
     "topic": "sản phẩm mới",
@@ -86,7 +86,7 @@
     "status": "Enabled"
   },
   {
-    "id": 8,
+    "id": 108,
     "name": "Hơi thở mùa xuân",
     "category": "spmoi",
     "topic": "sản phẩm mới",

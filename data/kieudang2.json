@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": 301,
       "name": "Hoa Hồng Phấn Xinh Tươi",
       "category": "bohoa",
       "topic": "Kiểu dáng",
@@ -12,7 +12,7 @@
       "status": "Enabled"
     },
     {
-      "id": 2,
+      "id": 302,
       "name": "Hoa Hồng Pastel Sang Trọng",
       "category": "bohoa",
       "topic": "Kiểu dáng",
@@ -23,7 +23,7 @@
       "status": "Enabled"
     },
     {
-      "id": 3,
+      "id": 303,
       "name": "Hoa Tình Yêu Ngập Ngàn",
       "category": "bohoa",
       "topic": "Kiểu dáng",
@@ -34,7 +34,7 @@
       "status": "Enabled"
     },
     {
-      "id": 4,
+      "id": 304,
       "name": "Hoa pastel sang trọng",
       "category": "bohoa",
       "topic": "Kiểu dáng",
@@ -45,7 +45,7 @@
       "status": "Enabled"
     },
     {
-      "id": 5,
+      "id": 305,
       "name": "Rực Rỡ Chói Chang",
       "category": "giohoa",
       "topic":"Kiểu dáng",
@@ -56,7 +56,7 @@
       "status": "Enabled"
     },
     {
-      "id": 6,
+      "id": 306,
       "name": "Trong Trẻo Sương Mai",
       "category": "giohoa",
       "topic": "Kiểu dáng",
@@ -67,7 +67,7 @@
       "status": "Enabled"
     },
     {
-      "id": 7,
+      "id": 307,
       "name": "Sương Mai Ngày Mới",
       "category": "giohoa",
       "topic": "Kiểu dáng",
@@ -78,7 +78,7 @@
       "status": "Enabled"
     },
     {
-      "id": 8,
+      "id": 308,
       "name": "Hơi thở mùa xuân",
       "category": "giohoa",
       "topic": "Kiểu dáng",
